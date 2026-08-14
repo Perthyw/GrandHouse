@@ -60,12 +60,14 @@ const routes = [
           category: body.category,
           unit: body.unit,
           standardCost: body.unitCost,
-          sellingPrice: 0
+          sellingPrice: 0,
+          imageData: body.imageData
         });
       } else {
         if (body.category) product.category = String(body.category);
         if (body.unit) product.unit = String(body.unit);
         if (Number.isFinite(Number(body.unitCost))) product.standardCost = Number(body.unitCost);
+        if (body.imageData) product.imageData = String(body.imageData);
       }
       return createInventoryTransaction(db, {
         type: "PURCHASE",

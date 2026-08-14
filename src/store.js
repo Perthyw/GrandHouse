@@ -19,6 +19,7 @@ export async function readDb() {
       return structuredClone(seedData);
     }
     if (migrateProductionRoomNames(db)) await writeDb(db);
+    if (migrateFoodWorkflow(db)) await writeDb(db);
     return db;
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
@@ -43,6 +44,20 @@ function migrateProductionRoomNames(db) {
   (db.foodProducts || []).forEach(rename);
   (db.kitchenDispatches || []).forEach(rename);
   (db.foodRequests || []).forEach((request) => (request.items || []).forEach(rename));
+  return changed;
+}
+
+function migrateFoodWorkflow(db) {
+  const legacyQueueStatuses = new Set(["ACCEPTED", "START_PRODUCTION", "READY_TO_DELIVER"]);
+  let changed = false;
+  (db.foodRequests || []).forEach((request) => {
+    if (legacyQueueStatuses.has(request.status)) {
+      request.status = "CREATED";
+      request.timeline ||= [];
+      request.timeline.push({ at: new Date().toISOString(), label: "ย้ายเข้าคิวรอจัดส่ง" });
+      changed = true;
+    }
+  });
   return changed;
 }
 

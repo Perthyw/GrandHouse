@@ -1663,6 +1663,71 @@ tr:last-child td {
   text-transform: none;
 }
 
+.product-thumbnail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inventory-branch-section {
+  margin-top: 18px;
+}
+
+.inventory-branch-section + .inventory-branch-section {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.inventory-branch-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+
+.inventory-branch-heading strong {
+  font-size: 18px;
+}
+
+.inventory-branch-heading span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pill small {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.product-thumbnail > img,
+.product-thumbnail > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 7px;
+  background: #e9f0f8;
+  color: var(--brand-blue);
+  font-weight: 800;
+  object-fit: cover;
+}
+
+.product-image-upload {
+  position: relative;
+  color: var(--brand-blue);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.product-image-upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 .line-actions {
   position: absolute;
   top: 10px;

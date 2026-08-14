@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   advanceMaterialRequest,
+  advanceFoodRequest,
   createFoodRequest,
   createInventoryTransaction,
   createKitchenDispatch,
@@ -68,6 +69,17 @@ test("new branch requests use readable date sequence ids without branch codes", 
 
   assert.match(material.id, /^OF\d{11}$/);
   assert.match(food.id, /^KC\d{11}$/);
+});
+
+test("kitchen sends a food request with one status update", () => {
+  const db = freshDb();
+  const request = createFoodRequest(db, {
+    branchId: "br-phu-doi",
+    items: [{ productId: "food-pork", requestedQty: 5 }]
+  });
+
+  const shipped = advanceFoodRequest(db, request.id);
+  assert.equal(shipped.status, "SHIPPED");
 });
 
 test("reorder point is branch and product specific", () => {

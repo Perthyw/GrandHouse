@@ -8,10 +8,7 @@ const transactionLabels = {
 };
 
 const foodTransitions = {
-  CREATED: "ACCEPTED",
-  ACCEPTED: "START_PRODUCTION",
-  START_PRODUCTION: "READY_TO_DELIVER",
-  READY_TO_DELIVER: "SHIPPED",
+  CREATED: "SHIPPED",
   SHIPPED: "BRANCH_RECEIVED",
   BRANCH_RECEIVED: "COMPLETED"
 };
@@ -252,6 +249,7 @@ export function updateProductPricing(db, kind, productId, input) {
   if (input.category != null) product.category = String(input.category);
   if (input.unit != null) product.unit = String(input.unit);
   if (kind === "food" && input.productionRoom != null) product.productionRoom = String(input.productionRoom);
+  if (input.imageData != null) product.imageData = String(input.imageData || "");
   return product;
 }
 
@@ -278,6 +276,7 @@ export function createProduct(db, kind, input) {
     unit,
     standardCost: roundMoney(standardCost),
     sellingPrice: kind === "food" ? roundMoney(sellingPrice) : 0,
+    imageData: String(input.imageData || ""),
     ...(kind === "food" ? { productionRoom: String(input.productionRoom || defaultProductionRoom({ name, category })) } : {})
   };
   collection.push(product);

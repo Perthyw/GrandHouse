@@ -301,8 +301,8 @@ function renderKitchen() {
         <div class="production-room-grid">${roomSummary.map(kitchenRoomBoard).join("")}</div>
       </section>
       <section class="panel section-panel kitchen-request-detail-panel">
-        ${sectionTitle("รายละเอียดคำขอแยกตามสาขา", "ใช้แก้จำนวนส่งจริงและติดตามรายการต้นทาง")}
-        <div class="stack">${openFood.map((request, index) => foodRequestCard(request, index + 1)).join("") || empty("ยังไม่มีคิวผลิต")}</div>
+        ${sectionTitle("รอบจัดส่งตามสาขา", "ครัวกดส่งออกครั้งเดียวต่อสาขาเมื่อของขึ้นรถแล้ว รายการจะย้ายไปประวัติการส่งทันที")}
+        <div class="stack">${kitchenDispatchBatches(openFood) || empty("ยังไม่มีคิวผลิต")}</div>
       </section>
     ` : ""}
     ${tab === "extra" ? `
@@ -330,6 +330,24 @@ function renderKitchen() {
       </section>
     ` : ""}
   `);
+}
+
+function kitchenDispatchBatches(requests) {
+  const byBranch = new Map();
+  requests.forEach((request) => {
+    const batch = byBranch.get(request.branchId) || { branchName: request.branchName, requests: [] };
+    batch.requests.push(request);
+    byBranch.set(request.branchId, batch);
+  });
+  return [...byBranch.values()].map((batch) => `
+    <section class="branch-request-group kitchen-dispatch-batch">
+      <div class="branch-group-title">
+        <div><strong>${batch.branchName}</strong><span>${batch.requests.length} รายการในรอบนี้</span></div>
+        <button class="primary red" data-ship-food-batch="${batch.requests.map((request) => request.id).join(",")}">ส่งออกให้สาขานี้</button>
+      </div>
+      <div class="stack">${batch.requests.map((request, index) => foodRequestCard(request, index + 1, true)).join("")}</div>
+    </section>
+  `).join("");
 }
 
 function kitchenRoomSummary(requests) {
@@ -549,7 +567,14 @@ function renderWarehouses() {
     </section>
     <section class="panel" style="margin-top:16px">
       <div class="row-between"><h2>รายการสินค้าทั้งหมด</h2><span class="pill">${warehouseRows.length} รายการ</span></div>
-      ${inventoryTable(warehouseRows)}
+      ${warehouseBranch === "all"
+        ? state.data.branches.map((branch) => `
+          <section class="inventory-branch-section">
+            <div class="inventory-branch-heading"><strong>${branch.name}</strong><span>${branch.warehouseName}</span></div>
+            ${inventoryTable(warehouseRows.filter((row) => row.branchId === branch.id))}
+          </section>
+        `).join("")
+        : inventoryTable(warehouseRows)}
     </section>
     <section class="panel section-panel reorder-setup-panel" style="margin-top:16px">
       ${sectionTitle("กำหนดจุดเตือนเติมสต็อก", "เลือกสาขาและสินค้า แล้วกำหนดจำนวนคงเหลือขั้นต่ำ ระบบจะแจ้งเตือนทันทีเมื่อยอดต่ำกว่าค่านี้")}
@@ -572,6 +597,7 @@ function renderWarehouses() {
             <datalist id="materialProductNames">${state.data.materialProducts.map((item) => `<option value="${escapeAttr(item.name)}"></option>`).join("")}</datalist>
             <label class="field"><span>หมวดหมู่</span>${select("category", [["วัตถุดิบ", "วัตถุดิบ"], ["บรรจุภัณฑ์", "บรรจุภัณฑ์"], ["เครื่องปรุง", "เครื่องปรุง"], ["ของแห้ง", "อาหารแห้ง"]], "วัตถุดิบ")}</label>
             <label class="field"><span>หน่วย</span>${unitSelect("unit", "ชิ้น")}</label>
+            <label class="field"><span>รูปสินค้า</span><input name="imageFile" type="file" accept="image/*"></label>
             <label class="field"><span>จำนวน</span><input name="quantity" type="number" min="0.01" step="0.01" required></label>
             <label class="field"><span>ต้นทุนต่อหน่วย</span><input name="unitCost" type="number" min="0.01" step="0.01" required></label>
             <label class="field"><span>วันที่รับเข้า</span><input name="receiveDate" type="date" value="${today()}"></label>
@@ -649,7 +675,8 @@ function warehouseManagementPanel(tab, warehouseRows) {
     return `
       <section class="panel section-panel">
         ${sectionTitle(`ข้อมูลสินค้า: ${foodCategory}`, "อาหารและน้ำไม่มีสต็อกค้างสาขา หน้านี้ใช้ดูหน่วย ห้องผลิต และราคาขายปัจจุบัน")}
-        ${simpleTable(["สินค้า", "หน่วย", "ห้องผลิต", "ราคาขาย"], rows.map((product) => [
+        ${simpleTable(["รูป", "สินค้า", "หน่วย", "ห้องผลิต", "ราคาขาย"], rows.map((product) => [
+          productThumbnail(product),
           product.name,
           product.unit,
           productionRoomBadge(product.productionRoom),
@@ -701,27 +728,36 @@ function renderOffice() {
   const tab = canRecordSales ? (state.filters.officeTab || "requests") : (state.filters.officeTab === "sales" ? "requests" : state.filters.officeTab || "requests");
   const officeBranch = state.filters.officeBranch || "all";
   const officeDate = state.filters.officeDate || today();
+  const officeStage = {
+    requests: { title: "คำขอใหม่", subtitle: "รายการที่สาขาส่งเข้ามา รอออฟฟิศกดรับเรื่อง", statuses: ["CREATED"] },
+    packing: { title: "กำลังจัดสินค้า", subtitle: "รายการที่ออฟฟิศกำลังหยิบและตรวจจำนวน", statuses: ["OFFICE_RECEIVED", "PREPARING"] },
+    ready: { title: "พร้อมส่ง", subtitle: "จัดสินค้าและตัดสต็อกแล้ว รอส่งออกให้สาขา", statuses: ["READY", "SHIPPED"] }
+  };
+  const selectedStage = officeStage[tab];
+  const visibleRequests = selectedStage ? requests.filter((request) => selectedStage.statuses.includes(request.status)) : requests;
   const branches = state.data.branches
-    .map((branch) => ({ ...branch, requests: requests.filter((request) => request.branchId === branch.id) }))
+    .map((branch) => ({ ...branch, requests: visibleRequests.filter((request) => request.branchId === branch.id) }))
     .filter((branch) => branch.requests.length);
   const salesRows = state.data.dailySales.filter((sale) => (officeBranch === "all" || sale.branchId === officeBranch) && (!state.filters.officeDate || sale.salesDate === state.filters.officeDate));
   const officeMenu = [
-    { title: "ออฟฟิศ", items: [
-      ["officeTab", "requests", "รายการเบิกจากสาขา", "", "", open.length],
-      ...(canRecordSales ? [["officeTab", "sales", "กรอกยอดขาย", "", "", salesRows.length || ""]] : []),
-      ["officeTab", "history", "ประวัติการจัดของ", "", "", requests.length]
-    ] }
+    { title: "งานเบิกของ", open: true, items: [
+      ["officeTab", "requests", "คำขอใหม่", "", "", requests.filter((request) => request.status === "CREATED").length],
+      ["officeTab", "packing", "กำลังจัดสินค้า", "", "", requests.filter((request) => ["OFFICE_RECEIVED", "PREPARING"].includes(request.status)).length],
+      ["officeTab", "ready", "พร้อมส่ง", "", "", requests.filter((request) => ["READY", "SHIPPED"].includes(request.status)).length]
+    ] },
+    { title: "ประวัติ", items: [["officeTab", "history", "ประวัติการจัดของ", "", "", requests.filter((request) => request.status === "COMPLETED").length]] },
+    ...(canRecordSales ? [{ title: "ยอดขาย", items: [["officeTab", "sales", "กรอกยอดขาย", "", "", salesRows.length || ""]] }] : [])
   ];
   return roleLayout("office", officeMenu, `
     ${filterPanel("office")}
-    ${tab === "requests" ? `
+    ${selectedStage ? `
       <div class="grid three">
         ${metric("คิววัตถุดิบ", open.length)}
         ${metric("พร้อมจัดของ", open.filter((request) => ["CREATED", "OFFICE_RECEIVED"].includes(request.status)).length)}
         ${metric("มูลค่าจัดของ", money(open.reduce((sum, request) => sum + request.totalCost, 0)))}
       </div>
       <section class="panel" style="margin-top:16px">
-        ${sectionTitle("รายการเบิกจากสาขา", "ออฟฟิศรับเรื่อง จัดวัตถุดิบ/บรรจุภัณฑ์ และตัดสต็อก")}
+        ${sectionTitle(selectedStage.title, selectedStage.subtitle)}
         <div class="stack">${branches.map((branch) => `
           <section class="branch-request-group">
             <div class="branch-group-title">
@@ -950,6 +986,7 @@ function renderPricing() {
         <label class="field"><span>หน่วยสินค้า</span>${unitSelect("unit", "ชิ้น")}</label>
         <label class="field"><span>ห้องผลิต</span>${productionRoomSelect("productionRoom")}</label>
         <label class="field"><span>ราคาขายจริงต่อหน่วย</span><input name="sellingPrice" type="number" min="0" step="0.01" required></label>
+        <label class="field"><span>รูปเมนู</span><input name="imageFile" type="file" accept="image/*"></label>
         <div class="form-actions"><button class="primary">เพิ่มเมนู</button></div>
       </form>
     </section>
@@ -1072,6 +1109,7 @@ function bindViewEvents(root) {
 
   root.querySelectorAll("[data-advance-material]").forEach((button) => button.addEventListener("click", () => advanceMaterial(button.dataset.advanceMaterial)));
   root.querySelectorAll("[data-advance-food]").forEach((button) => button.addEventListener("click", () => advanceFood(button.dataset.advanceFood)));
+  root.querySelectorAll("[data-ship-food-batch]").forEach((button) => button.addEventListener("click", () => shipFoodBatch(button.dataset.shipFoodBatch)));
   root.querySelectorAll("[data-confirm-food-received]").forEach((button) => button.addEventListener("click", () => confirmFoodReceived(button.dataset.confirmFoodReceived)));
   root.querySelectorAll("[data-confirm-dispatch-received]").forEach((button) => button.addEventListener("click", () => confirmDispatchReceived(button.dataset.confirmDispatchReceived)));
   root.querySelectorAll("[data-dispatch-status]").forEach((button) => button.addEventListener("click", () => updateDispatch(button.dataset.dispatchStatus, button.dataset.dispatchNext)));
@@ -1129,7 +1167,10 @@ async function handleDispatchCreate(event) {
 
 async function handleStockIn(event) {
   event.preventDefault();
-  const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+  const form = event.currentTarget;
+  const payload = Object.fromEntries(new FormData(form).entries());
+  payload.imageData = await readImageFile(form.elements.imageFile?.files?.[0]);
+  delete payload.imageFile;
   const supplier = state.data.suppliers.find((item) => item.id === payload.supplierId);
   payload.supplierName = supplier?.name;
   await run(() => api("/api/stock-in", { method: "POST", body: JSON.stringify(payload) }), "รับสินค้าเข้าคลังแล้ว");
@@ -1165,6 +1206,14 @@ async function advanceFood(id) {
   await run(() => api(`/api/food-requests/${id}/advance`, { method: "PATCH", body: JSON.stringify({ items }) }), `อัปเดต ${id} แล้ว`);
 }
 
+async function shipFoodBatch(ids) {
+  const requestIds = String(ids).split(",").filter(Boolean);
+  await run(
+    () => Promise.all(requestIds.map((id) => api(`/api/food-requests/${id}/advance`, { method: "PATCH", body: JSON.stringify({}) }))),
+    `บันทึกส่งออกให้สาขาแล้ว ${requestIds.length} รายการ`
+  );
+}
+
 async function confirmFoodReceived(id) {
   await run(() => api(`/api/food-requests/${id}/advance`, { method: "PATCH", body: JSON.stringify({}) }), "ยืนยันได้รับของแล้ว");
 }
@@ -1183,17 +1232,34 @@ async function updatePrice(button) {
   const kind = button.dataset.priceKind;
   const productId = button.dataset.priceProduct;
   const payload = {
-    sellingPrice: Number(row.querySelector("[data-price-selling]").value),
+    sellingPrice: Number(row.querySelector("[data-price-selling]")?.value || 0),
     productionRoom: row.querySelector("[data-price-room]")?.value
   };
+  const imageFile = row.querySelector("[data-product-image]")?.files?.[0];
+  if (imageFile) payload.imageData = await readImageFile(imageFile);
   await run(() => api(`/api/products/${kind}/${productId}/pricing`, { method: "PATCH", body: JSON.stringify(payload) }), "บันทึกราคาแล้ว");
 }
 
 async function handleProductCreate(event, kind) {
   event.preventDefault();
-  const payload = Object.fromEntries(new FormData(event.currentTarget).entries());
+  const form = event.currentTarget;
+  const payload = Object.fromEntries(new FormData(form).entries());
+  payload.imageData = await readImageFile(form.elements.imageFile?.files?.[0]);
+  delete payload.imageFile;
   if (kind === "material") payload.sellingPrice = 0;
   await run(() => api(`/api/products/${kind}`, { method: "POST", body: JSON.stringify(payload) }), kind === "food" ? "เพิ่มเมนูแล้ว" : "เพิ่มสินค้าแล้ว");
+}
+
+async function readImageFile(file) {
+  if (!file) return "";
+  if (!file.type.startsWith("image/")) throw new Error("กรุณาเลือกรูปภาพเท่านั้น");
+  if (file.size > 900000) throw new Error("รูปภาพต้องมีขนาดไม่เกิน 900 KB");
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(new Error("อ่านรูปภาพไม่สำเร็จ"));
+    reader.readAsDataURL(file);
+  });
 }
 
 async function handleDailySalesSave(event) {
@@ -1212,7 +1278,8 @@ async function run(action, successMessage) {
 }
 
 function materialRequestCard(request) {
-  const canEdit = canOffice() && ["CREATED", "OFFICE_RECEIVED"].includes(request.status);
+  const canEdit = canOffice() && ["CREATED", "OFFICE_RECEIVED", "PREPARING"].includes(request.status);
+  const canAdvance = canOffice() && ["CREATED", "OFFICE_RECEIVED", "PREPARING", "READY"].includes(request.status);
   const notEnoughItems = request.items.filter((item) => {
     const stock = stockFor(request.branchId, item.productId);
     return stock && Number(item.actualIssuedQty) > Number(stock.quantity);
@@ -1242,13 +1309,13 @@ function materialRequestCard(request) {
         money(item.totalCost)
       ];
       }))}
-      <div class="row-between" style="margin-top:12px"><strong>${money(request.totalCost)}</strong>${canEdit ? `<button class="primary" data-advance-material="${request.id}">${nextMaterialAction(request.status)}</button>` : `<span class="pill">${request.status === "COMPLETED" ? "เสร็จสิ้น" : "ดูข้อมูล"}</span>`}</div>
+      <div class="row-between" style="margin-top:12px"><strong>${money(request.totalCost)}</strong>${canAdvance ? `<button class="primary" data-advance-material="${request.id}">${nextMaterialAction(request.status)}</button>` : `<span class="pill">${request.status === "COMPLETED" ? "เสร็จสิ้น" : "ดูข้อมูล"}</span>`}</div>
     </article>
   `;
 }
 
-function foodRequestCard(request, priority = 0) {
-  const canEdit = canKitchen() && ["CREATED", "ACCEPTED", "START_PRODUCTION", "READY_TO_DELIVER", "BRANCH_RECEIVED"].includes(request.status);
+function foodRequestCard(request, priority = 0, inBatch = false) {
+  const canEdit = canKitchen() && request.status === "CREATED";
   const canConfirmReceived = canBranchFor(request.branchId) && request.status === "SHIPPED";
   return `
     <article class="request-card" data-card="${request.id}">
@@ -1268,7 +1335,7 @@ function foodRequestCard(request, priority = 0) {
         money(item.totalCost),
         money(item.totalSellingValue)
       ]))}
-      <div class="row-between" style="margin-top:12px"><strong>${money(request.totalSellingValue)}</strong>${foodActionButton(request, canEdit, canConfirmReceived)}</div>
+      <div class="row-between" style="margin-top:12px"><strong>${money(request.totalSellingValue)}</strong>${inBatch ? `<span class="pill neutral">อยู่ในรอบจัดส่ง</span>` : foodActionButton(request, canEdit, canConfirmReceived)}</div>
     </article>
   `;
 }
@@ -1373,11 +1440,8 @@ function foodActionButton(request, canEdit, canConfirmReceived) {
 
 function foodStepper(currentStatus) {
   const steps = [
-    ["CREATED", "ส่งคำขอ"],
-    ["ACCEPTED", "รับเรื่อง"],
-    ["START_PRODUCTION", "เตรียมของ"],
-    ["READY_TO_DELIVER", "พร้อมส่ง"],
-    ["SHIPPED", "ส่งแล้ว"],
+    ["CREATED", "รอจัดส่ง"],
+    ["SHIPPED", "ส่งออกแล้ว"],
     ["BRANCH_RECEIVED", "สาขารับแล้ว"]
   ];
   const currentIndex = Math.max(0, steps.findIndex(([statusValue]) => statusValue === currentStatus));
@@ -1419,22 +1483,27 @@ function materialStepper(currentStatus) {
 
 function inventoryTable(rows) {
   return simpleTable(
-    ["สาขา", "สินค้า", "หมวดหมู่", "คงเหลือ", "จุดสั่งซื้อ", "ต้นทุน", "มูลค่า", "สถานะ"],
+    ["รูป", "ชื่อ", "หมวดหมู่", "คงเหลือ", "จุดสั่งซื้อ", "ต้นทุน", "มูลค่า", "สถานะ"],
     rows.map((item) => [
-      item.branchName,
+      productThumbnail(state.data.materialProducts.find((product) => product.id === item.productId), item.productName),
       item.productName,
       item.category || "",
       qty(item.quantity, item.unit),
       reorderLabel(item),
       money(item.standardCost),
       money(item.inventoryValue),
-      Number(item.reorderPoint || 0) <= 0
-        ? `<span class="pill neutral">ยังไม่ตั้งจุดเตือน</span>`
-        : item.isLow
-          ? `<span class="pill warning">ต้องซื้อแล้ว</span>`
-          : `<span class="pill">ปกติ</span>`
+      inventoryAvailability(item)
     ])
   );
+}
+
+function inventoryAvailability(item) {
+  const reorderPoint = Number(item.reorderPoint || 0);
+  const quantity = Number(item.quantity || 0);
+  const isNearReorder = reorderPoint > 0 && quantity <= reorderPoint * 1.25;
+  return isNearReorder
+    ? `<span class="pill warning">เบิกได้ <small>(ของใกล้หมด)</small></span>`
+    : `<span class="pill">เบิกได้</span>`;
 }
 
 function transactionTable(rows) {
@@ -1496,8 +1565,9 @@ function kitchenHistoryTable(rows) {
 function priceTable(kind, products) {
   if (kind === "material") {
     return simpleTable(
-      ["สินค้า", "หมวดหมู่", "หน่วย", "ต้นทุน", ""],
+      ["รูป", "สินค้า", "หมวดหมู่", "หน่วย", "ต้นทุน", ""],
       products.map((product) => [
+        productThumbnail(product),
         product.name,
         `<input data-price-category value="${escapeAttr(product.category || "")}">`,
         unitSelect("", product.unit || "ชิ้น", "data-price-unit"),
@@ -1508,8 +1578,9 @@ function priceTable(kind, products) {
   }
 
   return simpleTable(
-    ["เมนู", "ประเภท", "หน่วย", "ห้องผลิต", "ราคาขายจริง", ""],
+    ["รูป", "เมนู", "ประเภท", "หน่วย", "ห้องผลิต", "ราคาขายจริง", ""],
     products.map((product) => [
+      productThumbnail(product, product.name, true),
       product.name,
       product.category,
       product.unit,
@@ -1518,6 +1589,13 @@ function priceTable(kind, products) {
       `<button class="primary" data-price-kind="${kind}" data-price-product="${product.id}">บันทึก</button>`
     ])
   );
+}
+
+function productThumbnail(product, fallbackName = "สินค้า", editable = false) {
+  const image = product?.imageData
+    ? `<img src="${escapeAttr(product.imageData)}" alt="${escapeAttr(fallbackName || product.name)}">`
+    : `<span>${escapeAttr(String(fallbackName || product?.name || "ส").slice(0, 1))}</span>`;
+  return `<div class="product-thumbnail">${image}${editable ? `<label class="product-image-upload" title="เปลี่ยนรูป"><input type="file" data-product-image accept="image/*"><span>เปลี่ยนรูป</span></label>` : ""}</div>`;
 }
 
 function simpleTable(headers, rows) {
@@ -2223,10 +2301,7 @@ function anomalyNote(row) {
 
 function kitchenPriority(statusValue) {
   return {
-    READY_TO_DELIVER: 1,
-    START_PRODUCTION: 2,
-    ACCEPTED: 3,
-    CREATED: 4
+    CREATED: 1
   }[statusValue] || 9;
 }
 
@@ -2448,10 +2523,7 @@ function nextMaterialAction(statusValue) {
 
 function nextFoodAction(statusValue) {
   return {
-    CREATED: "รับเรื่อง",
-    ACCEPTED: "กำลังผลิต",
-    START_PRODUCTION: "พร้อมส่ง",
-    READY_TO_DELIVER: "ส่ง",
+    CREATED: "ส่งออกแล้ว",
     SHIPPED: "สาขารับแล้ว",
     BRANCH_RECEIVED: "เสร็จสิ้น"
   }[statusValue] || "อัปเดต";
