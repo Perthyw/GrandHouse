@@ -1052,9 +1052,11 @@ function bindViewEvents(root) {
     bindNewLine(list);
   }));
 
-  root.querySelectorAll("[data-remove-line]").forEach((button) => button.addEventListener("click", () => {
+  root.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove-line]");
+    if (!button || !root.contains(button)) return;
     button.closest(".line-item")?.remove();
-  }));
+  });
 
   root.querySelector("#materialRequestForm")?.addEventListener("submit", handleMaterialCreate);
   root.querySelector("#packagingRequestForm")?.addEventListener("submit", handleMaterialCreate);
