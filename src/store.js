@@ -18,12 +18,32 @@ export async function readDb() {
       await writeDb(seedData);
       return structuredClone(seedData);
     }
+    if (migrateProductionRoomNames(db)) await writeDb(db);
     return db;
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
     await writeDb(seedData);
     return structuredClone(seedData);
   }
+}
+
+function migrateProductionRoomNames(db) {
+  const renamedRooms = {
+    "ห้องอาหาร1": "ห้องอาหาร",
+    "ห้องอาหาร2": "ครัวกลาง"
+  };
+  let changed = false;
+  const rename = (record) => {
+    if (record?.productionRoom && renamedRooms[record.productionRoom]) {
+      record.productionRoom = renamedRooms[record.productionRoom];
+      changed = true;
+    }
+  };
+
+  (db.foodProducts || []).forEach(rename);
+  (db.kitchenDispatches || []).forEach(rename);
+  (db.foodRequests || []).forEach((request) => (request.items || []).forEach(rename));
+  return changed;
 }
 
 export async function writeDb(data) {

@@ -544,8 +544,8 @@ function defaultProductionRoom(product = {}) {
   if (text.includes("สลัด")) return "ห้องสลัด";
   if (text.includes("ผลไม้") || text.includes("สมุนไพร")) return "ห้องผลไม้";
   if (text.includes("หวาน") || text.includes("ชา") || text.includes("ขนม")) return "ห้องของหวาน";
-  if (text.includes("เนื้อ")) return "ห้องอาหาร2";
-  return "ห้องอาหาร1";
+  if (text.includes("เนื้อ")) return "ครัวกลาง";
+  return "ห้องอาหาร";
 }
 
 function cleanRequestItems(db, items) {

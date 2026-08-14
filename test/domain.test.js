@@ -116,12 +116,12 @@ test("food price updates keep existing cost and production room", () => {
 
   updateProductPricing(db, "food", before.id, {
     sellingPrice: 345,
-    productionRoom: "ห้องอาหาร2"
+    productionRoom: "ครัวกลาง"
   });
 
   assert.equal(before.standardCost, 210);
   assert.equal(before.sellingPrice, 345);
-  assert.equal(before.productionRoom, "ห้องอาหาร2");
+  assert.equal(before.productionRoom, "ครัวกลาง");
 });
 
 test("kitchen extra dispatch snapshots price and production room", () => {

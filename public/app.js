@@ -55,8 +55,8 @@ const issueTypes = [
 ];
 
 const productionRooms = [
-  { name: "ห้องอาหาร1", tone: "food-one" },
-  { name: "ห้องอาหาร2", tone: "food-two" },
+  { name: "ห้องอาหาร", tone: "food-one" },
+  { name: "ครัวกลาง", tone: "food-two" },
   { name: "ห้องสลัด", tone: "salad" },
   { name: "ห้องผลไม้", tone: "fruit" },
   { name: "ห้องของหวาน", tone: "dessert" }
@@ -2298,7 +2298,7 @@ function unitSelect(name, selected = "ชิ้น", extraAttr = "") {
   return `<select ${nameAttr} ${extraAttr}>${units.map((unit) => `<option value="${unit}" ${selected === unit ? "selected" : ""}>${unit}</option>`).join("")}</select>`;
 }
 
-function productionRoomSelect(name, selected = "ห้องอาหาร1", extraAttr = "") {
+function productionRoomSelect(name, selected = "ห้องอาหาร", extraAttr = "") {
   const nameAttr = name ? `name="${name}"` : "";
   return `<select ${nameAttr} ${extraAttr}>${productionRooms.map((room) => `<option value="${room.name}" ${selected === room.name ? "selected" : ""}>${room.name}</option>`).join("")}</select>`;
 }

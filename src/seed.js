@@ -39,9 +39,9 @@ export const seedData = {
     { id: "mat-cup", name: "แก้วน้ำ", category: "บรรจุภัณฑ์", unit: "ชิ้น", standardCost: 1.8, sellingPrice: 0 }
   ],
   foodProducts: [
-    { id: "food-pork", name: "หมูหมักพร้อมขาย", category: "อาหารสำเร็จรูป", unit: "กก.", productionRoom: "ห้องอาหาร1", standardCost: 210, sellingPrice: 320 },
-    { id: "food-chicken", name: "ไก่หมักพร้อมขาย", category: "อาหารสำเร็จรูป", unit: "กก.", productionRoom: "ห้องอาหาร1", standardCost: 130, sellingPrice: 220 },
-    { id: "food-beef-set", name: "ชุดเนื้อ", category: "อาหารสำเร็จรูป", unit: "ชุด", productionRoom: "ห้องอาหาร2", standardCost: 145, sellingPrice: 260 },
+    { id: "food-pork", name: "หมูหมักพร้อมขาย", category: "อาหารสำเร็จรูป", unit: "กก.", productionRoom: "ห้องอาหาร", standardCost: 210, sellingPrice: 320 },
+    { id: "food-chicken", name: "ไก่หมักพร้อมขาย", category: "อาหารสำเร็จรูป", unit: "กก.", productionRoom: "ห้องอาหาร", standardCost: 130, sellingPrice: 220 },
+    { id: "food-beef-set", name: "ชุดเนื้อ", category: "อาหารสำเร็จรูป", unit: "ชุด", productionRoom: "ครัวกลาง", standardCost: 145, sellingPrice: 260 },
     { id: "food-tea", name: "ชานม", category: "น้ำ", unit: "แก้ว", productionRoom: "ห้องของหวาน", standardCost: 18, sellingPrice: 45 },
     { id: "food-herbal", name: "น้ำสมุนไพร", category: "น้ำ", unit: "ขวด", productionRoom: "ห้องผลไม้", standardCost: 12, sellingPrice: 35 }
   ],
