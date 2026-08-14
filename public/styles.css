@@ -32,7 +32,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--page);
+  background: #eaf0f7;
 }
 
 button,
@@ -61,7 +61,8 @@ button {
   flex-direction: column;
   gap: 22px;
   padding: 22px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
   border-right: 1px solid var(--line);
   color: var(--ink);
   box-shadow: 18px 0 50px rgba(16, 24, 32, 0.16);
@@ -1255,8 +1256,9 @@ h3 {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(27, 51, 78, 0.10);
 }
 
 .panel {
@@ -1715,6 +1717,10 @@ tr:last-child td {
   font-size: inherit;
   font-weight: 600;
 }
+
+.batch-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
+.primary.success { background: #168a5b; border-color: #168a5b; }
+.primary.success:hover { background: #106f48; border-color: #106f48; }
 
 .product-thumbnail > img,
 .product-thumbnail > span {

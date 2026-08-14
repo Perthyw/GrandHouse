@@ -9,8 +9,7 @@ const transactionLabels = {
 
 const foodTransitions = {
   CREATED: "SHIPPED",
-  SHIPPED: "BRANCH_RECEIVED",
-  BRANCH_RECEIVED: "COMPLETED"
+  SHIPPED: "BRANCH_RECEIVED"
 };
 
 const materialTransitions = {
@@ -18,8 +17,7 @@ const materialTransitions = {
   OFFICE_RECEIVED: "PREPARING",
   PREPARING: "READY",
   READY: "SHIPPED",
-  SHIPPED: "BRANCH_RECEIVED",
-  BRANCH_RECEIVED: "COMPLETED"
+  SHIPPED: "BRANCH_RECEIVED"
 };
 
 export function nowIso() {
@@ -491,7 +489,8 @@ function enrichMaterialRequest(db, request) {
     totalCost: roundMoney(
       request.items.reduce((sum, item) => {
         const product = db.materialProducts.find((material) => material.id === item.productId);
-        return sum + Number(item.actualIssuedQty || 0) * Number(product?.standardCost || 0);
+        const txn = db.inventoryTransactions.find((entry) => request.issueTransactionIds?.includes(entry.id) && entry.productId === item.productId);
+        return sum + Number(item.actualIssuedQty || 0) * Number(txn?.unitCost ?? product?.standardCost ?? 0);
       }, 0)
     ),
     totalSellingValue: roundMoney(
@@ -502,15 +501,16 @@ function enrichMaterialRequest(db, request) {
     ),
     items: request.items.map((item) => {
       const product = db.materialProducts.find((material) => material.id === item.productId);
+      const txn = db.inventoryTransactions.find((entry) => request.issueTransactionIds?.includes(entry.id) && entry.productId === item.productId);
       const actualIssuedQty = Number(item.actualIssuedQty || 0);
       return {
         ...item,
         productName: product?.name || item.productId,
         unit: product?.unit || "",
         category: product?.category || "",
-        unitCost: product?.standardCost || 0,
+        unitCost: Number(txn?.unitCost ?? product?.standardCost ?? 0),
         sellingPrice: product?.sellingPrice || 0,
-        totalCost: roundMoney(actualIssuedQty * Number(product?.standardCost || 0)),
+        totalCost: roundMoney(actualIssuedQty * Number(txn?.unitCost ?? product?.standardCost ?? 0)),
         totalSellingValue: roundMoney(actualIssuedQty * Number(product?.sellingPrice || 0))
       };
     })

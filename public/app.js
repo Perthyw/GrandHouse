@@ -340,9 +340,9 @@ function kitchenDispatchBatches(requests) {
     <section class="branch-request-group kitchen-dispatch-batch">
       <div class="branch-group-title">
         <div><strong>${batch.branchName}</strong><span>${batch.requests.length} รายการในรอบนี้</span></div>
-        <button class="primary red" data-ship-food-batch="${batch.requests.map((request) => request.id).join(",")}">ส่งออกให้สาขานี้</button>
       </div>
       <div class="stack">${batch.requests.map((request, index) => foodRequestCard(request, index + 1, true)).join("")}</div>
+      <div class="batch-actions"><button class="primary success" data-ship-food-batch>ส่งออก</button></div>
     </section>
   `).join("");
 }
@@ -1104,7 +1104,7 @@ function bindViewEvents(root) {
 
   root.querySelectorAll("[data-advance-material]").forEach((button) => button.addEventListener("click", () => advanceMaterial(button.dataset.advanceMaterial)));
   root.querySelectorAll("[data-advance-food]").forEach((button) => button.addEventListener("click", () => advanceFood(button.dataset.advanceFood)));
-  root.querySelectorAll("[data-ship-food-batch]").forEach((button) => button.addEventListener("click", () => shipFoodBatch(button.dataset.shipFoodBatch)));
+  root.querySelectorAll("[data-ship-food-batch]").forEach((button) => button.addEventListener("click", () => shipFoodBatch(button)));
   root.querySelectorAll("[data-confirm-food-received]").forEach((button) => button.addEventListener("click", () => confirmFoodReceived(button.dataset.confirmFoodReceived)));
   root.querySelectorAll("[data-confirm-dispatch-received]").forEach((button) => button.addEventListener("click", () => confirmDispatchReceived(button.dataset.confirmDispatchReceived)));
   root.querySelectorAll("[data-dispatch-status]").forEach((button) => button.addEventListener("click", () => updateDispatch(button.dataset.dispatchStatus, button.dataset.dispatchNext)));
@@ -1201,11 +1201,15 @@ async function advanceFood(id) {
   await run(() => api(`/api/food-requests/${id}/advance`, { method: "PATCH", body: JSON.stringify({ items }) }), `อัปเดต ${id} แล้ว`);
 }
 
-async function shipFoodBatch(ids) {
-  const requestIds = String(ids).split(",").filter(Boolean);
+async function shipFoodBatch(button) {
+  const batch = button.closest(".kitchen-dispatch-batch");
+  const requests = [...batch.querySelectorAll("[data-card]")].map((card) => ({
+    id: card.dataset.card,
+    items: [...card.querySelectorAll("[data-delivered-product]")].map((input) => ({ productId: input.dataset.deliveredProduct, deliveredQty: Number(input.value) }))
+  }));
   await run(
-    () => Promise.all(requestIds.map((id) => api(`/api/food-requests/${id}/advance`, { method: "PATCH", body: JSON.stringify({}) }))),
-    `บันทึกส่งออกให้สาขาแล้ว ${requestIds.length} รายการ`
+    () => Promise.all(requests.map((request) => api(`/api/food-requests/${request.id}/advance`, { method: "PATCH", body: JSON.stringify({ items: request.items }) }))),
+    `บันทึกส่งออกแล้ว ${requests.length} รายการ`
   );
 }
 
@@ -1973,9 +1977,18 @@ function exportMonthlyExcel(button) {
     entry.sellingPrice,
     entry.totalSellingValue
   ]);
+  const purchaseHeaders = ["วันที่", "เวลา", "สาขา", "สินค้า", "หมวดหมู่", "จำนวนรับเข้า", "หน่วย", "ต้นทุนต่อหน่วย", "ต้นทุนรวม", "เลขอ้างอิง", "ผู้บันทึก", "หมายเหตุ"];
+  const purchaseRows = state.data.inventoryTransactions
+    .filter((txn) => txn.type === "PURCHASE" && txn.dateTime.slice(0, 7) === month && (branchValue === "all" || txn.branchId === branchValue))
+    .map((txn) => {
+      const product = state.data.materialProducts.find((item) => item.id === txn.productId);
+      const branch = state.data.branches.find((item) => item.id === txn.branchId);
+      return [displayDate(txn.dateTime.slice(0, 10)), txn.dateTime.slice(11, 16), branch?.name || txn.branchId, product?.name || txn.productId, product?.category || "", txn.quantityChanged, product?.unit || "", txn.unitCost, txn.totalValue, txn.referenceNumber, txn.createdBy, txn.remarks];
+    });
   const workbook = spreadsheetWorkbook([
     ["สรุปรายวัน", summaryHeaders, summaryRows],
-    ["รายละเอียดต้นทุน", detailHeaders, detailRows]
+    ["รายละเอียดต้นทุน", detailHeaders, detailRows],
+    ["ประวัติซื้อเข้า", purchaseHeaders, purchaseRows]
   ]);
   const blob = new Blob([workbook], { type: "application/vnd.ms-excel;charset=utf-8" });
   const url = URL.createObjectURL(blob);
