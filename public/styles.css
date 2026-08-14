@@ -383,7 +383,11 @@ h3 {
   width: 86px;
   height: 93px;
   margin-bottom: 8px;
-  fill: #173b70;
+  fill: none;
+  stroke: #173b70;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  stroke-width: 8;
 }
 
 .login-brand strong {

@@ -133,8 +133,8 @@ function renderLogin() {
       <div class="bakery-login-card">
         <div class="login-brand">
           <svg class="login-g-logo" viewBox="0 0 100 108" aria-label="Grand House">
-            <path fill-rule="evenodd" d="M50 4 95 31v50L50 108 5 81V31L50 4Zm0 19L23 40v30l27 16 27-16V59L50 75V57l27-16-27-16Z"/>
-            <path d="M50 57 95 31v19L50 76V57Z"/>
+            <path d="M79 30 50 13 21 30v48l29 17 29-17V61L50 78V58l29-17"/>
+            <path d="M50 58 79 41"/>
           </svg>
           <strong>GRAND HOUSE</strong><span>INTERNAL SYSTEM</span>
         </div>
