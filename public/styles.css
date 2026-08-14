@@ -380,14 +380,10 @@ h3 {
 }
 
 .login-g-logo {
-  display: block;
-  height: 76px;
-  margin-bottom: 7px;
-  color: #173b70;
-  font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
-  font-size: 78px;
-  font-weight: 500;
-  line-height: 0.92;
+  width: 86px;
+  height: 93px;
+  margin-bottom: 8px;
+  fill: #173b70;
 }
 
 .login-brand strong {
