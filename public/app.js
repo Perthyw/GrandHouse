@@ -1612,7 +1612,7 @@ function foodLine(index, group = "all") {
 
 function removeLineButton(index) {
   return index > 0
-    ? `<button type="button" class="remove-line-button" data-remove-line title="ลบรายการนี้" aria-label="ลบรายการนี้">×</button>`
+    ? `<div class="line-actions"><button type="button" class="remove-line-button" data-remove-line title="ลบรายการนี้" aria-label="ลบรายการนี้">×</button></div>`
     : "";
 }
 

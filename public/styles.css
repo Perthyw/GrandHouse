@@ -1646,12 +1646,11 @@ tr:last-child td {
 }
 
 .product-line {
-  position: relative;
-  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-columns: minmax(0, 1fr) 150px 36px;
   gap: 12px;
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 14px 48px 14px 12px;
+  padding: 14px 12px;
   background: #ffffff;
 }
 
@@ -1663,27 +1662,33 @@ tr:last-child td {
   text-transform: none;
 }
 
+.line-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-self: end;
+}
+
 .remove-line-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   display: grid;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   place-items: center;
-  border: 0;
+  border: 1px solid #e0e6ed;
   border-radius: 50%;
   padding: 0;
-  background: #edf1f5;
+  background: #f8fafc;
   color: #718096;
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1;
   font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .remove-line-button:hover {
-  background: var(--soft-red);
+  border-color: #efc3be;
+  background: #fff4f2;
   color: var(--danger);
+  transform: translateY(-1px);
 }
 
 .request-product-select {
@@ -2292,12 +2297,15 @@ tr:last-child td {
   .branch-mode .branch-phone-shell .product-line {
     grid-template-columns: 1fr;
     gap: 10px;
-    padding: 14px 46px 14px 12px;
+    padding: 14px 12px 12px;
   }
 
-  .branch-mode .remove-line-button {
-    top: 12px;
-    right: 12px;
+  .branch-mode .line-actions {
+    grid-column: 1;
+    justify-content: flex-end;
+    margin-top: 2px;
+    padding-top: 10px;
+    border-top: 1px solid #eef2f6;
   }
 
   .branch-mode .request-product-select,
