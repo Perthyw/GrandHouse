@@ -9,8 +9,8 @@ export const seedData = {
     { id: "br-phu-doi", name: "ภูดอย", warehouseName: "คลังสาขาภูดอย" },
     { id: "br-ban-jo", name: "บ้านโจ้", warehouseName: "คลังสาขาบ้านโจ้" },
     { id: "br-kaset-mai", name: "เกษตรใหม่", warehouseName: "คลังสาขาเกษตรใหม่" },
-    { id: "br-tha-rua-1", name: "ท่ารั้ว1", warehouseName: "คลังสาขาท่ารั้ว1" },
-    { id: "br-tha-rua-2", name: "ท่ารั้ว2", warehouseName: "คลังสาขาท่ารั้ว2" }
+    { id: "br-tha-rua-1", name: "ท่ารั้ว", warehouseName: "คลังสาขาท่ารั้ว" },
+    { id: "br-tha-rua-2", name: "แกรนด์ปาร์ค", warehouseName: "คลังสาขาแกรนด์ปาร์ค" }
   ],
   users: [
     { id: "user-owner", username: "owner", password: "owner", name: "เจ้าของ", role: "OWNER" },
@@ -19,8 +19,8 @@ export const seedData = {
     { id: "user-phu-doi", username: "phudoi", password: "1234", name: "สาขาภูดอย", role: "BRANCH", branchId: "br-phu-doi" },
     { id: "user-ban-jo", username: "banjo", password: "1234", name: "สาขาบ้านโจ้", role: "BRANCH", branchId: "br-ban-jo" },
     { id: "user-kaset-mai", username: "kasetmai", password: "1234", name: "สาขาเกษตรใหม่", role: "BRANCH", branchId: "br-kaset-mai" },
-    { id: "user-tha-rua-1", username: "tharua1", password: "1234", name: "สาขาท่ารั้ว1", role: "BRANCH", branchId: "br-tha-rua-1" },
-    { id: "user-tha-rua-2", username: "tharua2", password: "1234", name: "สาขาท่ารั้ว2", role: "BRANCH", branchId: "br-tha-rua-2" }
+    { id: "user-tha-rua-1", username: "tharua1", password: "1234", name: "สาขาท่ารั้ว", role: "BRANCH", branchId: "br-tha-rua-1" },
+    { id: "user-tha-rua-2", username: "tharua2", password: "1234", name: "สาขาแกรนด์ปาร์ค", role: "BRANCH", branchId: "br-tha-rua-2" }
   ],
   suppliers: [
     { id: "sup-grand", name: "คลังใหญ่เดอะ แกรนด์" },

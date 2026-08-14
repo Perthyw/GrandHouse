@@ -20,6 +20,7 @@ export async function readDb() {
     }
     if (migrateProductionRoomNames(db)) await writeDb(db);
     if (migrateFoodWorkflow(db)) await writeDb(db);
+    if (migrateBranchNames(db)) await writeDb(db);
     return db;
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
@@ -44,6 +45,32 @@ function migrateProductionRoomNames(db) {
   (db.foodProducts || []).forEach(rename);
   (db.kitchenDispatches || []).forEach(rename);
   (db.foodRequests || []).forEach((request) => (request.items || []).forEach(rename));
+  return changed;
+}
+
+function migrateBranchNames(db) {
+  const renamedBranches = {
+    "br-tha-rua-1": { name: "ท่ารั้ว", warehouseName: "คลังสาขาท่ารั้ว", userName: "สาขาท่ารั้ว" },
+    "br-tha-rua-2": { name: "แกรนด์ปาร์ค", warehouseName: "คลังสาขาแกรนด์ปาร์ค", userName: "สาขาแกรนด์ปาร์ค" }
+  };
+  let changed = false;
+
+  (db.branches || []).forEach((branch) => {
+    const renamed = renamedBranches[branch.id];
+    if (!renamed) return;
+    if (branch.name !== renamed.name || branch.warehouseName !== renamed.warehouseName) {
+      branch.name = renamed.name;
+      branch.warehouseName = renamed.warehouseName;
+      changed = true;
+    }
+  });
+  (db.users || []).forEach((user) => {
+    const renamed = renamedBranches[user.branchId];
+    if (renamed && user.name !== renamed.userName) {
+      user.name = renamed.userName;
+      changed = true;
+    }
+  });
   return changed;
 }
 
