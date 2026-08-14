@@ -335,8 +335,9 @@ h3 {
   display: block;
   min-height: 100vh;
   background:
-    linear-gradient(130deg, rgba(11, 31, 56, 0.22), rgba(255, 255, 255, 0.92) 44%, rgba(22, 54, 95, 0.22)),
-    #eef3f8;
+    radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.96), transparent 31%),
+    radial-gradient(circle at 82% 76%, rgba(199, 216, 237, 0.6), transparent 35%),
+    linear-gradient(135deg, #f5f7fa 0%, #eaf1fa 51%, #dce8f6 100%);
 }
 
 .login-mode .sidebar,
@@ -348,145 +349,208 @@ h3 {
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 26px;
+  padding: 32px 24px;
 }
 
 .login-screen {
   display: grid;
-  width: min(100%, 960px);
-  min-height: calc(100vh - 52px);
+  width: min(100%, 520px);
+  min-height: calc(100vh - 64px);
   align-items: center;
-  justify-items: end;
+  justify-items: center;
 }
 
 .bakery-login-card {
-  width: min(100%, 500px);
-  border: 1px solid rgba(216, 224, 234, 0.72);
-  border-radius: 28px;
-  padding: 36px;
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 28px 80px rgba(16, 24, 32, 0.16);
-  backdrop-filter: blur(18px) saturate(1.18);
+  width: min(100%, 480px);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 30px;
+  padding: 44px 48px 34px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 24px 64px rgba(23, 59, 112, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  text-align: center;
+  backdrop-filter: blur(20px) saturate(1.05);
 }
 
-.login-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 42px;
-  color: var(--muted);
+.login-brand {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  margin-bottom: 31px;
+  color: #173b70;
+}
+
+.login-g-logo {
+  width: 68px;
+  height: 68px;
+  margin-bottom: 7px;
+  fill: none;
+  stroke: #173b70;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 4.4;
+}
+
+.login-brand strong {
+  color: #173b70;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.login-brand span {
+  color: #718096;
+  font-size: 11px;
   font-weight: 800;
 }
 
-.login-card-top strong {
-  color: var(--ink);
+.login-heading {
+  position: relative;
+  margin-bottom: 25px;
+  padding-top: 17px;
 }
 
-.login-heading {
-  margin-bottom: 24px;
+.login-heading::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 54px;
+  height: 2px;
+  border-radius: 2px;
+  background: #75aee9;
+  content: "";
+  transform: translateX(-50%);
 }
 
 .login-heading h2 {
-  margin-bottom: 8px;
-  font-size: 38px;
+  margin-bottom: 7px;
+  color: #17324d;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.login-heading .muted {
+  margin: 0;
+  color: #718096;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .role-login-form {
   display: grid;
-  gap: 16px;
+  gap: 13px;
 }
 
 .login-pill-field {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 8px;
+  grid-template-columns: 32px minmax(0, 1fr) 30px;
+  gap: 10px;
   align-items: center;
   width: 100%;
-  min-height: 58px;
-  border: 1px solid rgba(216, 224, 234, 0.74);
-  border-radius: 999px;
-  padding: 7px 18px 7px 8px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.64), rgba(231, 239, 248, 0.26)),
-    rgba(255, 255, 255, 0.34);
+  min-height: 59px;
+  border: 1px solid rgba(190, 205, 224, 0.7);
+  border-radius: 17px;
+  padding: 0 15px;
+  background: rgba(255, 255, 255, 0.78);
   color: var(--ink);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.76),
-    0 14px 30px rgba(16, 24, 32, 0.08);
-  backdrop-filter: blur(16px) saturate(1.2);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+  box-shadow: 0 8px 22px rgba(23, 59, 112, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .login-pill-field:hover {
-  transform: translateY(-2px);
-  border-color: rgba(45, 95, 154, 0.58);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(231, 239, 248, 0.38)),
-    rgba(255, 255, 255, 0.48);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 18px 36px rgba(16, 24, 32, 0.13);
+  border-color: #9cbbe0;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .login-pill-field:focus-within {
-  border-color: #2d5f9a;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 0 0 4px rgba(22, 54, 95, 0.13),
-    0 18px 36px rgba(16, 24, 32, 0.13);
+  border-color: #173b70;
+  box-shadow: 0 0 0 4px rgba(23, 59, 112, 0.1), 0 10px 24px rgba(23, 59, 112, 0.08);
 }
 
 .login-field-icon {
   display: grid;
-  min-width: 42px;
-  height: 42px;
+  width: 28px;
+  height: 28px;
   place-items: center;
-  border-radius: 999px;
-  background: rgba(219, 232, 246, 0.78);
-  color: var(--brown-dark);
-  font-size: 12px;
-  font-weight: 900;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  color: #718096;
+}
+
+.login-field-icon svg,
+.password-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .login-pill-field select,
 .login-pill-field input {
   border: 0;
+  min-width: 0;
   padding: 8px 0;
   background: transparent;
   outline: 0;
-  color: var(--ink);
-  font-weight: 800;
+  color: #17324d;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.login-pill-field select {
+  grid-column: 2 / 4;
+  cursor: pointer;
+}
+
+.login-pill-field input::placeholder {
+  color: #9aa7b9;
+}
+
+.password-toggle {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #718096;
+}
+
+.password-toggle:hover {
+  color: #173b70;
 }
 
 .login-submit-button {
-  min-height: 58px;
+  min-height: 59px;
+  margin-top: 7px;
   border: 0;
-  border-radius: 999px;
-  background: var(--brown);
-  color: var(--cream);
-  font-weight: 900;
-  box-shadow: 0 18px 32px rgba(16, 24, 32, 0.2);
+  border-radius: 17px;
+  background: #173b70;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  box-shadow: 0 13px 25px rgba(23, 59, 112, 0.22);
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .login-submit-button:hover {
-  background: var(--brown-dark);
-  transform: translateY(-4px) scale(1.015);
-  box-shadow: 0 24px 44px rgba(16, 24, 32, 0.28);
+  background: #102f5c;
+  transform: translateY(-2px);
+  box-shadow: 0 17px 30px rgba(23, 59, 112, 0.28);
 }
 
 .login-submit-button:active {
-  transform: translateY(-1px) scale(1);
-  box-shadow: 0 14px 28px rgba(16, 24, 32, 0.22);
+  transform: translateY(0);
+  box-shadow: 0 9px 18px rgba(23, 59, 112, 0.2);
 }
 
 .login-note {
-  margin: 24px 0 0;
-  color: #7a6b5f;
+  margin: 29px 0 0;
+  color: #718096;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -2193,17 +2257,18 @@ tr:last-child td {
   }
 
   .bakery-login-card {
-    padding: 26px;
-    border-radius: 24px;
+    padding: 36px 24px 28px;
+    border-radius: 28px;
   }
 
   .login-heading h2 {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .login-pill-field {
-    grid-template-columns: 48px minmax(0, 1fr);
-    min-height: 54px;
+    grid-template-columns: 28px minmax(0, 1fr) 28px;
+    min-height: 56px;
+    padding: 0 13px;
   }
 
   .line-item {

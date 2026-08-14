@@ -131,33 +131,38 @@ function renderLogin() {
   document.getElementById("viewRoot").innerHTML = `
     <section class="login-screen">
       <div class="bakery-login-card">
-        <div class="login-card-top">
-          <span>แกรนด์ เฮาส์</span>
-          <strong>ระบบภายใน</strong>
+        <div class="login-brand">
+          <svg class="login-g-logo" viewBox="0 0 72 72" aria-hidden="true"><path d="M50 21a24 24 0 1 0 4 30"/><path d="M51 35H36l15 10V28"/></svg>
+          <strong>GRAND HOUSE</strong><span>INTERNAL SYSTEM</span>
         </div>
         <div class="login-heading">
           <h2>เข้าสู่ระบบ</h2>
-          <p class="muted">เลือกบทบาท แล้วกรอกรหัสประจำบทบาทนั้น</p>
+          <p class="muted">กรุณาเลือกบทบาท และกรอกรหัสประจำตัว</p>
         </div>
         <form id="loginForm" class="role-login-form">
           <label class="login-pill-field">
-            <span class="login-field-icon">บท</span>
+            <span class="login-field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5c.9-3.1 3.1-4.7 6.5-4.7s5.6 1.6 6.5 4.7"/></svg></span>
             <select name="userId" aria-label="เลือกบทบาท">
               ${users.map((user) => `<option value="${user.id}">${roleLoginLabel(user)}</option>`).join("")}
             </select>
           </label>
           <label class="login-pill-field">
-            <span class="login-field-icon">รหัส</span>
-            <input name="password" type="password" autocomplete="current-password" placeholder="เดโมไม่ต้องกรอกรหัส">
+            <span class="login-field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5.5" y="10" width="13" height="10" rx="2"/><path d="M8.5 10V7.8a3.5 3.5 0 0 1 7 0V10M12 14v2.2"/></svg></span>
+            <input name="password" type="password" autocomplete="current-password" placeholder="กรอกรหัสผ่าน">
+            <button class="password-toggle" type="button" aria-label="แสดงรหัสผ่าน"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.8 12s3.2-5 9.2-5 9.2 5 9.2 5-3.2 5-9.2 5-9.2-5-9.2-5Z"/><circle cx="12" cy="12" r="2.6"/></svg></button>
           </label>
           <button class="login-submit-button">เข้าสู่ระบบ</button>
         </form>
-        <p class="login-note">เชื่อมข้อมูลครัวกลาง · สาขา · คลัง · ออฟฟิศ · เจ้าของ</p>
+        <p class="login-note">ระบบคลังและเบิกภายใน</p>
       </div>
     </section>
   `;
 
   document.getElementById("loginForm").addEventListener("submit", loginWithCode);
+  document.querySelector(".password-toggle")?.addEventListener("click", (event) => {
+    const input = event.currentTarget.closest(".login-pill-field").querySelector("input");
+    input.type = input.type === "password" ? "text" : "password";
+  });
 }
 
 async function loginWithCode(event) {
