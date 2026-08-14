@@ -132,7 +132,7 @@ function renderLogin() {
     <section class="login-screen">
       <div class="bakery-login-card">
         <div class="login-brand">
-          <svg class="login-g-logo" viewBox="0 0 72 72" aria-hidden="true"><path d="M50 21a24 24 0 1 0 4 30"/><path d="M51 35H36l15 10V28"/></svg>
+          <span class="login-g-logo" aria-hidden="true">G</span>
           <strong>GRAND HOUSE</strong><span>INTERNAL SYSTEM</span>
         </div>
         <div class="login-heading">

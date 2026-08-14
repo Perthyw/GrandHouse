@@ -380,14 +380,18 @@ h3 {
 }
 
 .login-g-logo {
-  width: 68px;
-  height: 68px;
+  display: grid;
+  width: 70px;
+  height: 70px;
+  place-items: center;
   margin-bottom: 7px;
-  fill: none;
-  stroke: #173b70;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-  stroke-width: 4.4;
+  border: 2px solid #173b70;
+  border-radius: 50%;
+  color: #173b70;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .login-brand strong {
