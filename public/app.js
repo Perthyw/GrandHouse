@@ -285,7 +285,6 @@ function renderKitchen() {
   const roomSummary = kitchenRoomSummary(openFood);
 
   return roleLayout("kitchen", kitchenMenu, `
-    ${filterPanel("kitchen")}
     <div class="grid three">
       ${metric("รายการจากสาขา", openFood.length)}
       ${metric("ครัวส่งเพิ่มวันนี้", shippedToday.length)}
@@ -663,7 +662,6 @@ function renderWarehouses() {
     </section>
   `;
   return roleLayout("warehouse", warehouseMenu, `
-    ${filterPanel("warehouse")}
     ${tab === "products" ? productsContent : tab === "stock-alerts" ? alertContent : warehouseManagementPanel(tab, warehouseRows)}
   `);
 }
@@ -749,7 +747,6 @@ function renderOffice() {
     ...(canRecordSales ? [{ title: "ยอดขาย", items: [["officeTab", "sales", "กรอกยอดขาย", "", "", salesRows.length || ""]] }] : [])
   ];
   return roleLayout("office", officeMenu, `
-    ${filterPanel("office")}
     ${selectedStage ? `
       <div class="grid three">
         ${metric("คิววัตถุดิบ", open.length)}
