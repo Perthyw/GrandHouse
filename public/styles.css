@@ -380,18 +380,14 @@ h3 {
 }
 
 .login-g-logo {
-  display: grid;
-  width: 70px;
-  height: 70px;
-  place-items: center;
+  display: block;
+  height: 76px;
   margin-bottom: 7px;
-  border: 2px solid #173b70;
-  border-radius: 50%;
   color: #173b70;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 52px;
-  font-weight: 600;
-  line-height: 1;
+  font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+  font-size: 78px;
+  font-weight: 500;
+  line-height: 0.92;
 }
 
 .login-brand strong {
