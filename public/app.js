@@ -1480,11 +1480,10 @@ function materialStepper(currentStatus) {
 
 function inventoryTable(rows) {
   return simpleTable(
-    ["รูป", "ชื่อ", "หมวดหมู่", "คงเหลือ", "จุดสั่งซื้อ", "ต้นทุน", "มูลค่า", "สถานะ"],
+    ["รูป", "รายการ", "คงเหลือ", "จุดสั่งซื้อ", "ต้นทุน", "มูลค่า", "สถานะ"],
     rows.map((item) => [
       productThumbnail(state.data.materialProducts.find((product) => product.id === item.productId), item.productName),
-      item.productName,
-      item.category || "",
+      `<div class="inventory-item-details"><strong>${item.productName}</strong><small>หมวดหมู่: ${item.category || "-"}</small><small>หน่วย: ${item.unit || "-"}</small></div>`,
       qty(item.quantity, item.unit),
       reorderLabel(item),
       money(item.standardCost),

@@ -1695,6 +1695,22 @@ tr:last-child td {
   font-size: 13px;
 }
 
+.inventory-item-details {
+  display: grid;
+  gap: 3px;
+  min-width: 180px;
+}
+
+.inventory-item-details strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.inventory-item-details small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .pill small {
   font-size: inherit;
   font-weight: 600;
