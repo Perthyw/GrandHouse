@@ -1646,11 +1646,12 @@ tr:last-child td {
 }
 
 .product-line {
-  grid-template-columns: minmax(0, 1fr) 150px 36px;
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) 150px;
   gap: 12px;
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 14px 12px;
+  padding: 14px 46px 14px 12px;
   background: #ffffff;
 }
 
@@ -1663,9 +1664,9 @@ tr:last-child td {
 }
 
 .line-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-self: end;
+  position: absolute;
+  top: 10px;
+  right: 12px;
 }
 
 .remove-line-button {
@@ -2295,15 +2296,12 @@ tr:last-child td {
   .branch-mode .branch-phone-shell .product-line {
     grid-template-columns: 1fr;
     gap: 10px;
-    padding: 14px 12px 12px;
+    padding: 14px 46px 14px 12px;
   }
 
   .branch-mode .line-actions {
-    grid-column: 1;
-    justify-content: flex-end;
-    margin-top: 2px;
-    padding-top: 10px;
-    border-top: 1px solid #eef2f6;
+    top: 12px;
+    right: 12px;
   }
 
   .branch-mode .request-product-select,
