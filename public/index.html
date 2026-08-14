@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบคลังและเบิกของแกรนด์ เฮาส์</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <button class="main-menu-button" id="mainMenuButton" type="button" aria-label="เปิดเมนูหลัก">
+        <span class="brand-mark" aria-hidden="true">
+          <svg class="brand-logo" viewBox="0 0 64 64" focusable="false">
+            <path class="logo-house" d="M12 32 L32 15 L52 32" />
+            <path class="logo-house" d="M18 30 V50 H46 V30" />
+            <path class="logo-house" d="M28 50 V38 H36 V50" />
+            <path class="logo-house" d="M23 34 H29" />
+            <path class="logo-house" d="M35 34 H41" />
+          </svg>
+        </span>
+      </button>
+      <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="ปิดเมนูหลัก"></button>
+      <aside class="sidebar">
+        <button class="brand" id="sidebarToggle" type="button" aria-label="ซ่อนหรือแสดงเมนูหลัก" aria-pressed="false">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="brand-logo" viewBox="0 0 64 64" focusable="false">
+              <path class="logo-house" d="M12 32 L32 15 L52 32" />
+              <path class="logo-house" d="M18 30 V50 H46 V30" />
+              <path class="logo-house" d="M28 50 V38 H36 V50" />
+              <path class="logo-house" d="M23 34 H29" />
+              <path class="logo-house" d="M35 34 H41" />
+            </svg>
+          </span>
+          <div>
+            <strong>แกรนด์ เฮาส์</strong>
+            <small>ระบบคลังและการเบิกของ</small>
+          </div>
+        </button>
+        <div class="field" id="userPanel"></div>
+        <nav class="nav" id="mainNav" aria-label="เมนูหลัก"></nav>
+        <div class="context-nav" id="contextNav"></div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="viewEyebrow">ระบบภายใน</p>
+            <h1 id="viewTitle">เลือกผู้ใช้งาน</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" id="refreshButton" title="รีเฟรชข้อมูล">↻</button>
+            <span class="status-pill" id="ledgerStatus">พร้อมใช้งาน</span>
+          </div>
+        </header>
+        <section id="viewRoot" class="view-root"></section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
