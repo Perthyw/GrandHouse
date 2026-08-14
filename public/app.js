@@ -123,7 +123,6 @@ function renderLogin() {
   setSidebarOpen(false);
   document.getElementById("viewEyebrow").textContent = "เข้าใช้งาน";
   document.getElementById("viewTitle").textContent = "เลือกผู้ใช้งาน";
-  document.getElementById("ledgerStatus").textContent = "ยังไม่ได้เลือกผู้ใช้งาน";
   document.getElementById("mainNav").innerHTML = "";
   document.getElementById("contextNav").innerHTML = "";
   document.getElementById("userPanel").innerHTML = "";
@@ -193,7 +192,6 @@ function render() {
   const [eyebrow, title] = viewMeta[state.view] || ["", ""];
   document.getElementById("viewEyebrow").textContent = eyebrow;
   document.getElementById("viewTitle").textContent = title;
-  document.getElementById("ledgerStatus").textContent = `${state.data.inventoryTransactions.length} รายการเคลื่อนไหว`;
   state.contextMenuGroups = [];
 
   renderNav();
