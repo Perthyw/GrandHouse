@@ -1505,6 +1505,9 @@ function inventoryTable(rows) {
 function inventoryAvailability(item) {
   const reorderPoint = Number(item.reorderPoint || 0);
   const quantity = Number(item.quantity || 0);
+  if (quantity <= 0) {
+    return `<span class="pill danger">เบิกไม่ได้ <small>(สินค้าหมด)</small></span>`;
+  }
   const isNearReorder = reorderPoint > 0 && quantity <= reorderPoint * 1.25;
   return isNearReorder
     ? `<span class="pill warning">เบิกได้ <small>(ของใกล้หมด)</small></span>`
