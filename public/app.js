@@ -201,7 +201,6 @@ function render() {
   document.getElementById("viewTitle").textContent = title;
   state.contextMenuGroups = [];
 
-  renderNav();
   renderUserPanel();
 
   const root = document.getElementById("viewRoot");
@@ -214,27 +213,44 @@ function render() {
     owner: renderOwner
   }[state.view]?.() || empty("ไม่มีสิทธิ์เข้าถึง");
 
+  // roleLayout() supplies the contextual groups while the view is rendered.
+  // Render navigation afterwards so the active major heading owns its submenu.
+  renderNav();
   renderContextMenu();
   bindViewEvents(root);
 }
 
 function renderNav() {
   const nav = document.getElementById("mainNav");
-  nav.innerHTML = allowedViews().map((view) => `<button class="nav-link ${state.view === view ? "active" : ""}" data-view="${view}">${viewLabels[view]}</button>`).join("");
+  const groups = state.contextMenuGroups || [];
+  const isBranchMode = document.body.classList.contains("branch-mode");
+  nav.innerHTML = allowedViews().map((view) => {
+    const isActive = state.view === view;
+    const submenu = isActive && !isBranchMode && groups.length
+      ? `<div class="nav-submenu" aria-label="เมนูย่อย${viewLabels[view]}">${groups.map((group) => roleMenuGroup(group)).join("")}</div>`
+      : "";
+    return `
+      <div class="nav-view-block ${isActive ? "expanded" : ""}">
+        <button class="nav-link ${isActive ? "active" : ""}" data-view="${view}">${viewLabels[view]}</button>
+        ${submenu}
+      </div>
+    `;
+  }).join("");
   nav.querySelectorAll("[data-view]").forEach((button) => {
     button.addEventListener("click", () => {
       state.view = button.dataset.view;
-      setSidebarOpen(false);
       render();
       window.scrollTo({ top: 0, behavior: "auto" });
     });
   });
+  bindTabButtons(nav, true);
 }
 
 function renderContextMenu() {
   const context = document.getElementById("contextNav");
   const groups = state.contextMenuGroups || [];
-  context.innerHTML = groups.length ? `
+  const isBranchMode = document.body.classList.contains("branch-mode");
+  context.innerHTML = isBranchMode && groups.length ? `
     <div class="context-nav-divider"></div>
     ${groups.map((group) => roleMenuGroup(group)).join("")}
   ` : "";
