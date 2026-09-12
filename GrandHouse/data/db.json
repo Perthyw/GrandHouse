@@ -1,0 +1,1603 @@
+{
+  "schemaVersion": 9,
+  "company": {
+    "parent": "เดอะ แกรนด์",
+    "business": "แกรนด์ เฮาส์",
+    "centralKitchenName": "ห้องผลิตแกรนด์ เฮาส์"
+  },
+  "branches": [
+    {
+      "id": "br-phu-doi",
+      "name": "ภูดอย",
+      "warehouseName": "การเบิกสาขาภูดอย",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "br-ban-jo",
+      "name": "บ้านโจ้",
+      "warehouseName": "การเบิกสาขาบ้านโจ้",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "br-kaset-mai",
+      "name": "เกษตรใหม่",
+      "warehouseName": "การเบิกสาขาเกษตรใหม่",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "br-tha-rua-1",
+      "name": "ท่ารั้ว",
+      "warehouseName": "การเบิกสาขาท่ารั้ว",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "br-tha-rua-2",
+      "name": "แกรนด์ปาร์ค",
+      "warehouseName": "การเบิกสาขาแกรนด์ปาร์ค",
+      "brandId": "grand-house"
+    }
+  ],
+  "users": [
+    {
+      "id": "user-owner",
+      "username": "owner",
+      "password": "owner",
+      "name": "เจ้าของ",
+      "role": "OWNER"
+    },
+    {
+      "id": "user-office",
+      "username": "office",
+      "password": "office",
+      "name": "ออฟฟิศ",
+      "role": "OFFICE"
+    },
+    {
+      "id": "user-kitchen",
+      "username": "kitchen",
+      "password": "kitchen",
+      "name": "ห้องผลิต",
+      "role": "KITCHEN"
+    },
+    {
+      "id": "user-phu-doi",
+      "username": "phudoi",
+      "password": "1234",
+      "name": "สาขาภูดอย",
+      "role": "BRANCH",
+      "branchId": "br-phu-doi"
+    },
+    {
+      "id": "user-ban-jo",
+      "username": "banjo",
+      "password": "1234",
+      "name": "สาขาบ้านโจ้",
+      "role": "BRANCH",
+      "branchId": "br-ban-jo"
+    },
+    {
+      "id": "user-kaset-mai",
+      "username": "kasetmai",
+      "password": "1234",
+      "name": "สาขาเกษตรใหม่",
+      "role": "BRANCH",
+      "branchId": "br-kaset-mai"
+    },
+    {
+      "id": "user-tha-rua-1",
+      "username": "tharua1",
+      "password": "1234",
+      "name": "สาขาท่ารั้ว",
+      "role": "BRANCH",
+      "branchId": "br-tha-rua-1"
+    },
+    {
+      "id": "user-tha-rua-2",
+      "username": "tharua2",
+      "password": "1234",
+      "name": "สาขาแกรนด์ปาร์ค",
+      "role": "BRANCH",
+      "branchId": "br-tha-rua-2"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "sup-grand",
+      "name": "คลังใหญ่เดอะ แกรนด์",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "sup-local",
+      "name": "ซื้อจากตลาด",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "sup-pack",
+      "name": "ร้านบรรจุภัณฑ์",
+      "brandId": "grand-house"
+    }
+  ],
+  "materialProducts": [
+    {
+      "id": "mat-pork",
+      "name": "หมูสด",
+      "category": "วัตถุดิบ",
+      "unit": "กก.",
+      "standardCost": 165,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-chicken",
+      "name": "ไก่สด",
+      "category": "วัตถุดิบ",
+      "unit": "กก.",
+      "standardCost": 92,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-sauce",
+      "name": "ซอสหมัก",
+      "category": "เครื่องปรุง",
+      "unit": "ลิตร",
+      "standardCost": 58,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-seasoning",
+      "name": "ผงปรุงรส",
+      "category": "เครื่องปรุง",
+      "unit": "แพ็ก",
+      "standardCost": 42,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-rice",
+      "name": "ข้าวสาร",
+      "category": "ของแห้ง",
+      "unit": "กก.",
+      "standardCost": 38,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-noodle",
+      "name": "เส้นแห้ง",
+      "category": "ของแห้ง",
+      "unit": "แพ็ก",
+      "standardCost": 24,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-box",
+      "name": "กล่องอาหาร",
+      "category": "บรรจุภัณฑ์",
+      "unit": "ชิ้น",
+      "standardCost": 3.8,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-bag",
+      "name": "ถุงหิ้ว",
+      "category": "บรรจุภัณฑ์",
+      "unit": "ชิ้น",
+      "standardCost": 0.55,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "mat-cup",
+      "name": "แก้วน้ำ",
+      "category": "บรรจุภัณฑ์",
+      "unit": "ชิ้น",
+      "standardCost": 1.8,
+      "sellingPrice": 0,
+      "brandId": "grand-house"
+    }
+  ],
+  "foodProducts": [
+    {
+      "id": "food-pork",
+      "name": "หมูหมักพร้อมขาย",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กก.",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 210,
+      "sellingPrice": 320,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-chicken",
+      "name": "ไก่หมักพร้อมขาย",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กก.",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 130,
+      "sellingPrice": 220,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-rice",
+      "name": "ข้าวหอมมะลิพร้อมเสิร์ฟ",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กก.",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 45,
+      "sellingPrice": 75,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-pork-grill",
+      "name": "หมูย่างสมุนไพร",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กก.",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 180,
+      "sellingPrice": 290,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-chicken-grill",
+      "name": "ไก่ย่างซอสพริกไทยดำ",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กก.",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 150,
+      "sellingPrice": 250,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-vegetable",
+      "name": "ผัดผักรวมมิตร",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "ถาด",
+      "productionRoom": "ห้องอาหาร",
+      "standardCost": 90,
+      "sellingPrice": 160,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-beef-set",
+      "name": "ชุดเนื้อ",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "ชุด",
+      "productionRoom": "ครัวกลาง",
+      "standardCost": 145,
+      "sellingPrice": 260,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-tea",
+      "name": "ชานม",
+      "category": "น้ำ",
+      "unit": "แก้ว",
+      "productionRoom": "ห้องของหวาน",
+      "standardCost": 18,
+      "sellingPrice": 45,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-herbal",
+      "name": "น้ำสมุนไพร",
+      "category": "น้ำ",
+      "unit": "ขวด",
+      "productionRoom": "ห้องผลไม้",
+      "standardCost": 12,
+      "sellingPrice": 35,
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-custom-006",
+      "name": "แตงโม",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "กล่อง",
+      "standardCost": 10,
+      "sellingPrice": 25,
+      "imageData": "",
+      "productionRoom": "ห้องผลไม้",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "food-custom-007",
+      "name": "แรปทูน่า",
+      "category": "อาหารสำเร็จรูป",
+      "unit": "ชิ้น",
+      "standardCost": 24,
+      "sellingPrice": 60,
+      "imageData": "",
+      "productionRoom": "ห้องสลัด",
+      "brandId": "grand-house"
+    }
+  ],
+  "inventorySettings": [
+    {
+      "branchId": "br-phu-doi",
+      "productId": "mat-pork",
+      "reorderPoint": 35,
+      "reserveTarget": 50,
+      "brandId": "grand-house",
+      "targetStock": 50,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-phu-doi",
+      "productId": "mat-chicken",
+      "reorderPoint": 30,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-phu-doi",
+      "productId": "mat-box",
+      "reorderPoint": 450,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-phu-doi",
+      "productId": "mat-rice",
+      "reorderPoint": 25,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-ban-jo",
+      "productId": "mat-pork",
+      "reorderPoint": 30,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-ban-jo",
+      "productId": "mat-sauce",
+      "reorderPoint": 20,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-ban-jo",
+      "productId": "mat-bag",
+      "reorderPoint": 400,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-ban-jo",
+      "productId": "mat-noodle",
+      "reorderPoint": 40,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-kaset-mai",
+      "productId": "mat-chicken",
+      "reorderPoint": 32,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-kaset-mai",
+      "productId": "mat-box",
+      "reorderPoint": 500,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-kaset-mai",
+      "productId": "mat-seasoning",
+      "reorderPoint": 25,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-1",
+      "productId": "mat-pork",
+      "reorderPoint": 28,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-1",
+      "productId": "mat-seasoning",
+      "reorderPoint": 18,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-1",
+      "productId": "mat-cup",
+      "reorderPoint": 260,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-2",
+      "productId": "mat-chicken",
+      "reorderPoint": 26,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-2",
+      "productId": "mat-cup",
+      "reorderPoint": 300,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "branchId": "br-tha-rua-2",
+      "productId": "mat-rice",
+      "reorderPoint": 24,
+      "reserveTarget": 0,
+      "brandId": "grand-house",
+      "targetStock": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-sauce",
+      "reorderPoint": 20,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-pork",
+      "reorderPoint": 93,
+      "targetStock": 50,
+      "reserveTarget": 50,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-chicken",
+      "reorderPoint": 88,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-box",
+      "reorderPoint": 950,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-rice",
+      "reorderPoint": 49,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-bag",
+      "reorderPoint": 400,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-noodle",
+      "reorderPoint": 40,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-seasoning",
+      "reorderPoint": 43,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    },
+    {
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "productId": "mat-cup",
+      "reorderPoint": 560,
+      "targetStock": 0,
+      "reserveTarget": 0,
+      "eoq": 0
+    }
+  ],
+  "inventoryTransactions": [
+    {
+      "id": "txn-001",
+      "dateTime": "2026-07-21T08:00:00.000+07:00",
+      "branchId": "br-phu-doi",
+      "productId": "mat-pork",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721001",
+      "previousQuantity": 0,
+      "quantityChanged": 80,
+      "currentQuantity": 80,
+      "unitCost": 165,
+      "totalValue": 13200,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-002",
+      "dateTime": "2026-07-21T08:05:00.000+07:00",
+      "branchId": "br-phu-doi",
+      "productId": "mat-box",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721002",
+      "previousQuantity": 0,
+      "quantityChanged": 900,
+      "currentQuantity": 900,
+      "unitCost": 3.8,
+      "totalValue": 3420,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-003",
+      "dateTime": "2026-07-21T08:10:00.000+07:00",
+      "branchId": "br-ban-jo",
+      "productId": "mat-sauce",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721003",
+      "previousQuantity": 0,
+      "quantityChanged": 42,
+      "currentQuantity": 42,
+      "unitCost": 58,
+      "totalValue": 2436,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-004",
+      "dateTime": "2026-07-21T08:15:00.000+07:00",
+      "branchId": "br-kaset-mai",
+      "productId": "mat-chicken",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721004",
+      "previousQuantity": 0,
+      "quantityChanged": 72,
+      "currentQuantity": 72,
+      "unitCost": 92,
+      "totalValue": 6624,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-005",
+      "dateTime": "2026-07-21T08:20:00.000+07:00",
+      "branchId": "br-tha-rua-1",
+      "productId": "mat-seasoning",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721005",
+      "previousQuantity": 0,
+      "quantityChanged": 30,
+      "currentQuantity": 30,
+      "unitCost": 42,
+      "totalValue": 1260,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-006",
+      "dateTime": "2026-07-21T08:25:00.000+07:00",
+      "branchId": "br-tha-rua-2",
+      "productId": "mat-cup",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721006",
+      "previousQuantity": 0,
+      "quantityChanged": 520,
+      "currentQuantity": 520,
+      "unitCost": 1.8,
+      "totalValue": 936,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-007",
+      "dateTime": "2026-07-21T08:30:00.000+07:00",
+      "branchId": "br-phu-doi",
+      "productId": "mat-rice",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721007",
+      "previousQuantity": 0,
+      "quantityChanged": 18,
+      "currentQuantity": 18,
+      "unitCost": 38,
+      "totalValue": 684,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-008",
+      "dateTime": "2026-07-21T08:35:00.000+07:00",
+      "branchId": "br-ban-jo",
+      "productId": "mat-noodle",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721008",
+      "previousQuantity": 0,
+      "quantityChanged": 24,
+      "currentQuantity": 24,
+      "unitCost": 24,
+      "totalValue": 576,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-009",
+      "dateTime": "2026-07-21T08:40:00.000+07:00",
+      "branchId": "br-tha-rua-1",
+      "productId": "mat-cup",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721009",
+      "previousQuantity": 520,
+      "quantityChanged": 180,
+      "currentQuantity": 700,
+      "unitCost": 1.8,
+      "totalValue": 324,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "txn-010",
+      "dateTime": "2026-07-21T08:45:00.000+07:00",
+      "branchId": "br-tha-rua-2",
+      "productId": "mat-rice",
+      "type": "PURCHASE",
+      "referenceNumber": "PO20260721010",
+      "previousQuantity": 18,
+      "quantityChanged": 14,
+      "currentQuantity": 32,
+      "unitCost": 38,
+      "totalValue": 532,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ยอดตั้งต้น",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "TXN-260828-001",
+      "dateTime": "2026-08-28T09:17:14.565Z",
+      "branchId": "br-phu-doi",
+      "productId": "mat-box",
+      "type": "MATERIAL_REQUEST",
+      "referenceNumber": "OF20260828001",
+      "previousQuantity": 900,
+      "quantityChanged": -40,
+      "currentQuantity": 860,
+      "unitCost": 3.8,
+      "totalValue": -152,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ตัดสต็อกจากรายการเบิกวัตถุดิบ",
+      "brandId": "grand-house",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "TXN-260911-001",
+      "dateTime": "2026-09-11T12:08:00.000+07:00",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "brandId": "grand-house",
+      "branchId": "office",
+      "productId": "mat-rice",
+      "type": "PURCHASE",
+      "referenceNumber": "DEP-260911-001",
+      "previousQuantity": 32,
+      "quantityChanged": 45,
+      "currentQuantity": 77,
+      "unitCost": 38,
+      "totalValue": 1710,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ผู้ขาย: ซื้อจากตลาด"
+    },
+    {
+      "id": "TXN-260911-002",
+      "dateTime": "2026-09-11T12:33:00.000+07:00",
+      "warehouseId": "office",
+      "stockOwnerType": "GRAND_SUPPLIED",
+      "brandId": "grand-house",
+      "branchId": "office",
+      "productId": "mat-sauce",
+      "type": "PURCHASE",
+      "referenceNumber": "DEP-260911-002",
+      "previousQuantity": 42,
+      "quantityChanged": 3,
+      "currentQuantity": 45,
+      "unitCost": 58,
+      "totalValue": 174,
+      "createdBy": "ออฟฟิศ",
+      "remarks": "ผู้ขาย: คลังใหญ่เดอะ แกรนด์"
+    }
+  ],
+  "kitchenDispatches": [
+    {
+      "id": "KC20260721001",
+      "branchId": "br-phu-doi",
+      "productId": "food-pork",
+      "sourceType": "KITCHEN_EXTRA",
+      "plannedQty": 45,
+      "actualQty": 42,
+      "status": "SHIPPED",
+      "dispatchDate": "2026-07-21",
+      "dispatchTime": "07:45",
+      "createdAt": "2026-07-21T07:20:00.000+07:00",
+      "updatedAt": "2026-07-21T07:45:00.000+07:00",
+      "timeline": [
+        {
+          "at": "2026-07-21T07:20:00.000+07:00",
+          "label": "รอส่ง"
+        },
+        {
+          "at": "2026-07-21T07:45:00.000+07:00",
+          "label": "จัดส่งแล้ว"
+        }
+      ],
+      "remarks": "ส่งตามแผนเช้า",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260721002",
+      "branchId": "br-ban-jo",
+      "productId": "food-tea",
+      "sourceType": "KITCHEN_EXTRA",
+      "plannedQty": 80,
+      "actualQty": 80,
+      "status": "PLANNED",
+      "dispatchDate": "2026-07-21",
+      "dispatchTime": "08:00",
+      "createdAt": "2026-07-21T07:30:00.000+07:00",
+      "updatedAt": "2026-07-21T07:30:00.000+07:00",
+      "timeline": [
+        {
+          "at": "2026-07-21T07:30:00.000+07:00",
+          "label": "รอส่ง"
+        }
+      ],
+      "remarks": "ประมาณการณ์รายวัน",
+      "brandId": "grand-house"
+    }
+  ],
+  "foodRequests": [
+    {
+      "id": "KC20260828003",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "CREATED",
+      "createdAt": "2026-08-28T10:12:56.776Z",
+      "items": [
+        {
+          "productId": "food-pork",
+          "requestedQty": 5,
+          "deliveredQty": 5,
+          "unitCost": 210,
+          "sellingPrice": 320,
+          "productionRoom": "ห้องอาหาร",
+          "status": "REQUESTED"
+        },
+        {
+          "productId": "food-custom-006",
+          "requestedQty": 5,
+          "deliveredQty": 5,
+          "unitCost": 10,
+          "sellingPrice": 25,
+          "productionRoom": "ห้องผลไม้",
+          "status": "REQUESTED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T10:12:56.777Z",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260828002",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "CREATED",
+      "createdAt": "2026-08-28T10:11:10.644Z",
+      "items": [
+        {
+          "productId": "food-pork",
+          "requestedQty": 5,
+          "deliveredQty": 5,
+          "unitCost": 210,
+          "sellingPrice": 320,
+          "productionRoom": "ห้องอาหาร",
+          "status": "REQUESTED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T10:11:10.644Z",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260828001",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "CREATED",
+      "createdAt": "2026-08-28T09:45:05.831Z",
+      "items": [
+        {
+          "productId": "food-custom-007",
+          "requestedQty": 20,
+          "deliveredQty": 20,
+          "unitCost": 24,
+          "sellingPrice": 60,
+          "productionRoom": "ห้องสลัด",
+          "status": "REQUESTED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:45:05.831Z",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260721003",
+      "branchId": "br-kaset-mai",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "BRANCH_RECEIVED",
+      "createdAt": "2026-07-21T09:20:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-pork",
+          "requestedQty": 50,
+          "deliveredQty": 40,
+          "status": "IN_PRODUCTION"
+        },
+        {
+          "productId": "food-beef-set",
+          "requestedQty": 25,
+          "deliveredQty": 15,
+          "status": "IN_PRODUCTION"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:20:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-07-21T09:35:00.000+07:00",
+          "label": "ห้องผลิตรับเรื่อง"
+        },
+        {
+          "at": "2026-07-21T09:45:00.000+07:00",
+          "label": "เริ่มผลิต"
+        },
+        {
+          "at": "2026-08-28T08:36:04.963Z",
+          "label": "ย้ายเข้าคิวรอจัดส่ง"
+        },
+        {
+          "at": "2026-08-28T10:03:20.590Z",
+          "label": "จัดส่งแล้ว"
+        },
+        {
+          "at": "2026-08-28T10:04:09.086Z",
+          "label": "สาขารับของแล้ว"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260721004",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "CREATED",
+      "createdAt": "2026-07-21T09:28:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-chicken",
+          "requestedQty": 30,
+          "deliveredQty": 30,
+          "status": "REQUESTED"
+        },
+        {
+          "productId": "food-tea",
+          "requestedQty": 50,
+          "deliveredQty": 50,
+          "status": "REQUESTED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:28:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260721005",
+      "branchId": "br-tha-rua-2",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "CREATED",
+      "createdAt": "2026-07-21T09:32:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-herbal",
+          "requestedQty": 60,
+          "deliveredQty": 60,
+          "status": "REQUESTED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:32:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-07-21T09:39:00.000+07:00",
+          "label": "ห้องผลิตรับเรื่อง"
+        },
+        {
+          "at": "2026-08-28T08:36:04.963Z",
+          "label": "ย้ายเข้าคิวรอจัดส่ง"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260829003",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "COMPLETED",
+      "createdAt": "2026-08-29T08:10:00.000+07:00",
+      "updatedAt": "2026-08-29T10:25:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-rice",
+          "requestedQty": 120,
+          "deliveredQty": 120,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        },
+        {
+          "productId": "food-pork-grill",
+          "requestedQty": 80,
+          "deliveredQty": 80,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-29T08:10:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-29T08:20:00.000+07:00",
+          "label": "ห้องผลิตรับเรื่อง"
+        },
+        {
+          "at": "2026-08-29T10:10:00.000+07:00",
+          "label": "จัดส่งแล้ว"
+        },
+        {
+          "at": "2026-08-29T10:25:00.000+07:00",
+          "label": "สาขารับของแล้ว"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260829002",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "COMPLETED",
+      "createdAt": "2026-08-29T08:05:00.000+07:00",
+      "updatedAt": "2026-08-29T10:20:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-chicken-grill",
+          "requestedQty": 65,
+          "deliveredQty": 65,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        },
+        {
+          "productId": "food-vegetable",
+          "requestedQty": 45,
+          "deliveredQty": 45,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-29T08:05:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-29T08:18:00.000+07:00",
+          "label": "ห้องผลิตรับเรื่อง"
+        },
+        {
+          "at": "2026-08-29T10:05:00.000+07:00",
+          "label": "จัดส่งแล้ว"
+        },
+        {
+          "at": "2026-08-29T10:20:00.000+07:00",
+          "label": "สาขารับของแล้ว"
+        }
+      ],
+      "brandId": "grand-house"
+    },
+    {
+      "id": "KC20260829001",
+      "branchId": "br-phu-doi",
+      "sourceType": "BRANCH_REQUEST",
+      "status": "COMPLETED",
+      "createdAt": "2026-08-29T08:00:00.000+07:00",
+      "updatedAt": "2026-08-29T10:15:00.000+07:00",
+      "items": [
+        {
+          "productId": "food-pork",
+          "requestedQty": 95,
+          "deliveredQty": 95,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        },
+        {
+          "productId": "food-chicken",
+          "requestedQty": 70,
+          "deliveredQty": 70,
+          "productionRoom": "ห้องอาหาร",
+          "status": "DELIVERED"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-29T08:00:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-29T08:15:00.000+07:00",
+          "label": "ห้องผลิตรับเรื่อง"
+        },
+        {
+          "at": "2026-08-29T10:00:00.000+07:00",
+          "label": "จัดส่งแล้ว"
+        },
+        {
+          "at": "2026-08-29T10:15:00.000+07:00",
+          "label": "สาขารับของแล้ว"
+        }
+      ],
+      "brandId": "grand-house"
+    }
+  ],
+  "materialRequests": [
+    {
+      "id": "OF20260911001",
+      "brandId": "grand-house",
+      "branchId": "br-kaset-mai",
+      "sourceType": "GRAND_SUPPLIED",
+      "status": "CREATED",
+      "createdAt": "2026-09-11T05:06:21.979Z",
+      "items": [
+        {
+          "productId": "mat-box",
+          "requestedQty": 20,
+          "actualIssuedQty": 20,
+          "unitCost": 3.8,
+          "totalCost": 76
+        },
+        {
+          "productId": "mat-bag",
+          "requestedQty": 50,
+          "actualIssuedQty": 50,
+          "unitCost": 0.55,
+          "totalCost": 27.5
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-09-11T05:06:21.979Z",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "issueTransactionIds": []
+    },
+    {
+      "id": "OF20260828005",
+      "branchId": "br-phu-doi",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-08-28T09:28:23.000Z",
+      "items": [
+        {
+          "productId": "mat-rice",
+          "requestedQty": 10,
+          "actualIssuedQty": 10,
+          "unitCost": 38,
+          "totalCost": 380
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:28:23.000Z",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:29:42.878Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260828004",
+      "branchId": "br-phu-doi",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-08-28T09:28:05.563Z",
+      "items": [
+        {
+          "productId": "mat-box",
+          "requestedQty": 50,
+          "actualIssuedQty": 50,
+          "unitCost": 3.8,
+          "totalCost": 190
+        },
+        {
+          "productId": "mat-cup",
+          "requestedQty": 10,
+          "actualIssuedQty": 10,
+          "unitCost": 1.8,
+          "totalCost": 18
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:28:05.563Z",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:29:41.331Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260828003",
+      "branchId": "br-phu-doi",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-08-28T09:27:49.130Z",
+      "items": [
+        {
+          "productId": "mat-pork",
+          "requestedQty": 1,
+          "actualIssuedQty": 1,
+          "unitCost": 165,
+          "totalCost": 165
+        },
+        {
+          "productId": "mat-chicken",
+          "requestedQty": 1,
+          "actualIssuedQty": 1,
+          "unitCost": 92,
+          "totalCost": 92
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:27:49.130Z",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:29:39.742Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260828002",
+      "branchId": "br-phu-doi",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-08-28T09:26:47.968Z",
+      "items": [
+        {
+          "productId": "mat-sauce",
+          "requestedQty": 5,
+          "actualIssuedQty": 5,
+          "unitCost": 58,
+          "totalCost": 290
+        },
+        {
+          "productId": "mat-seasoning",
+          "requestedQty": 2,
+          "actualIssuedQty": 2,
+          "unitCost": 42,
+          "totalCost": 84
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:26:47.968Z",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:29:35.326Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260828001",
+      "branchId": "br-phu-doi",
+      "status": "BRANCH_RECEIVED",
+      "createdAt": "2026-08-28T09:16:23.585Z",
+      "items": [
+        {
+          "productId": "mat-box",
+          "requestedQty": 40,
+          "actualIssuedQty": 40,
+          "unitCost": 3.8,
+          "totalCost": 152
+        },
+        {
+          "productId": "mat-bag",
+          "requestedQty": 100,
+          "actualIssuedQty": 0,
+          "unitCost": 0.55,
+          "totalCost": 0
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-08-28T09:16:23.585Z",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:16:58.966Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        },
+        {
+          "at": "2026-08-28T09:17:14.565Z",
+          "label": "จัดส่งแล้ว"
+        },
+        {
+          "at": "2026-08-28T09:17:38.745Z",
+          "label": "สาขารับของแล้ว"
+        }
+      ],
+      "issueTransactionIds": [
+        "TXN-260828-001"
+      ],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260721001",
+      "branchId": "br-tha-rua-1",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-07-21T09:00:00.000+07:00",
+      "items": [
+        {
+          "productId": "mat-seasoning",
+          "requestedQty": 12,
+          "actualIssuedQty": 12,
+          "unitCost": 42,
+          "totalCost": 504
+        },
+        {
+          "productId": "mat-box",
+          "requestedQty": 250,
+          "actualIssuedQty": 240,
+          "unitCost": 3.8,
+          "totalCost": 912
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:00:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-07-21T09:15:00.000+07:00",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260721002",
+      "branchId": "br-ban-jo",
+      "status": "CREATED",
+      "createdAt": "2026-07-21T09:08:00.000+07:00",
+      "items": [
+        {
+          "productId": "mat-sauce",
+          "requestedQty": 35,
+          "actualIssuedQty": 35,
+          "unitCost": 58,
+          "totalCost": 2030
+        },
+        {
+          "productId": "mat-noodle",
+          "requestedQty": 36,
+          "actualIssuedQty": 36,
+          "unitCost": 24,
+          "totalCost": 864
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:08:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260721003",
+      "branchId": "br-phu-doi",
+      "status": "OFFICE_RECEIVED",
+      "createdAt": "2026-07-21T09:12:00.000+07:00",
+      "items": [
+        {
+          "productId": "mat-rice",
+          "requestedQty": 28,
+          "actualIssuedQty": 28,
+          "unitCost": 38,
+          "totalCost": 1064
+        },
+        {
+          "productId": "mat-box",
+          "requestedQty": 350,
+          "actualIssuedQty": 350,
+          "unitCost": 3.8,
+          "totalCost": 1330
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:12:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        },
+        {
+          "at": "2026-08-28T09:29:46.636Z",
+          "label": "ออฟฟิศรับเรื่อง"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    },
+    {
+      "id": "OF20260721004",
+      "branchId": "br-tha-rua-2",
+      "status": "CREATED",
+      "createdAt": "2026-07-21T09:18:00.000+07:00",
+      "items": [
+        {
+          "productId": "mat-cup",
+          "requestedQty": 380,
+          "actualIssuedQty": 380,
+          "unitCost": 1.8,
+          "totalCost": 684
+        },
+        {
+          "productId": "mat-rice",
+          "requestedQty": 20,
+          "actualIssuedQty": 20,
+          "unitCost": 38,
+          "totalCost": 760
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-07-21T09:18:00.000+07:00",
+          "label": "สาขาสร้างรายการ"
+        }
+      ],
+      "issueTransactionIds": [],
+      "brandId": "grand-house",
+      "sourceType": "GRAND_SUPPLIED"
+    }
+  ],
+  "branchDailyClosings": [],
+  "dailySales": [
+    {
+      "id": "SALE20260721001",
+      "branchId": "br-phu-doi",
+      "salesDate": "2026-07-21",
+      "cashSales": 12850,
+      "transferSales": 18740,
+      "remarks": "ยอดรวมปิดร้าน",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "SALE20260721002",
+      "branchId": "br-ban-jo",
+      "salesDate": "2026-07-21",
+      "cashSales": 9200,
+      "transferSales": 14350,
+      "remarks": "เงินสดและสแกน",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "SALE20260721003",
+      "branchId": "br-kaset-mai",
+      "salesDate": "2026-07-21",
+      "cashSales": 16200,
+      "transferSales": 26580,
+      "remarks": "ยอดรวมจากพนักงาน",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "SALE20260721004",
+      "branchId": "br-tha-rua-1",
+      "salesDate": "2026-07-21",
+      "cashSales": 7800,
+      "transferSales": 11900,
+      "remarks": "",
+      "brandId": "grand-house"
+    },
+    {
+      "id": "SALE20260721005",
+      "branchId": "br-tha-rua-2",
+      "salesDate": "2026-07-21",
+      "cashSales": 8400,
+      "transferSales": 12650,
+      "remarks": "",
+      "brandId": "grand-house"
+    }
+  ],
+  "stockOwners": [
+    {
+      "id": "grand",
+      "type": "GRAND_SUPPLIED",
+      "name": "แกรนด์",
+      "label": "คลังกลาง Grand House",
+      "hasCost": true
+    }
+  ],
+  "inventoryOptions": {
+    "materialCategories": [
+      "วัตถุดิบ",
+      "บรรจุภัณฑ์",
+      "เครื่องปรุง",
+      "ของแห้ง"
+    ],
+    "units": [
+      "กล่อง",
+      "ขวด",
+      "แก้ว",
+      "จาน",
+      "ถ้วย",
+      "ชุด",
+      "ชิ้น",
+      "แผ่น",
+      "แถว",
+      "ใบ",
+      "ม้วน",
+      "แพ็ก",
+      "ถุง",
+      "กก.",
+      "กิโลกรัม",
+      "ขีด",
+      "กรัม",
+      "ลิตร"
+    ],
+    "categoryAliases": {
+      "วัตถุดิบ": "วัตถุดิบ",
+      "บรรจุภัณฑ์": "บรรจุภัณฑ์",
+      "เครื่องปรุง": "เครื่องปรุง",
+      "ของแห้ง": "ของแห้ง"
+    }
+  },
+  "singleWarehouseMode": true,
+  "singleWarehouseModeVersion": 5
+}

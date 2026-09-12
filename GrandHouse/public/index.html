@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ระบบคลังและเบิกของแกรนด์ เฮาส์</title>
+    <link rel="stylesheet" href="/styles.css?v=20260911-central-warehouse-v2" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <button class="main-menu-button" id="mainMenuButton" type="button" aria-label="เปิดเมนูหลัก">
+        <span class="brand-mark" aria-hidden="true">
+          <svg class="brand-logo" viewBox="0 0 64 64" focusable="false">
+            <path class="logo-smoke" d="M39 13 C36 13 35 10.5 37 8.5 C38 7.3 40 7.4 41 8.5 C41 5.8 43 4 45 5 C47 6 47 8.5 45.5 10 C48 9.8 49 12 47.5 13" />
+            <path class="logo-house" d="M11 31 C11 30 11.5 29.5 12.2 28.9 L29.8 14.7 C31.1 13.7 32.9 13.7 34.2 14.7 L51.8 28.9 C52.5 29.5 53 30 53 31" />
+            <path class="logo-house" d="M17 29.5 V48.5 C17 50 18 51 19.5 51 H44.5 C46 51 47 50 47 48.5 V29.5" />
+            <path class="logo-house" d="M27.5 51 V39.5 C27.5 38.4 28.4 37.5 29.5 37.5 H34.5 C35.6 37.5 36.5 38.4 36.5 39.5 V51" />
+          </svg>
+        </span>
+      </button>
+      <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="ปิดเมนูหลัก"></button>
+      <aside class="sidebar">
+        <button class="brand" id="sidebarToggle" type="button" aria-label="ซ่อนหรือแสดงเมนูหลัก" aria-pressed="false">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="brand-logo" viewBox="0 0 64 64" focusable="false">
+              <path class="logo-smoke" d="M39 13 C36 13 35 10.5 37 8.5 C38 7.3 40 7.4 41 8.5 C41 5.8 43 4 45 5 C47 6 47 8.5 45.5 10 C48 9.8 49 12 47.5 13" />
+              <path class="logo-house" d="M11 31 C11 30 11.5 29.5 12.2 28.9 L29.8 14.7 C31.1 13.7 32.9 13.7 34.2 14.7 L51.8 28.9 C52.5 29.5 53 30 53 31" />
+              <path class="logo-house" d="M17 29.5 V48.5 C17 50 18 51 19.5 51 H44.5 C46 51 47 50 47 48.5 V29.5" />
+              <path class="logo-house" d="M27.5 51 V39.5 C27.5 38.4 28.4 37.5 29.5 37.5 H34.5 C35.6 37.5 36.5 38.4 36.5 39.5 V51" />
+            </svg>
+          </span>
+          <div>
+            <strong>แกรนด์ เฮาส์</strong>
+            <small>ระบบคลังและการเบิกของ</small>
+          </div>
+        </button>
+        <div class="field" id="userPanel"></div>
+        <nav class="nav" id="mainNav" aria-label="เมนูหลัก"></nav>
+        <div class="context-nav" id="contextNav"></div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="viewEyebrow">ระบบภายใน</p>
+            <h1 id="viewTitle">เลือกผู้ใช้งาน</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button production-back-button" id="productionBackButton" title="กลับหน้าหลักห้องผลิต" aria-label="กลับหน้าหลักห้องผลิต" hidden><span aria-hidden="true">←</span></button>
+            <button class="icon-button warehouse-topbar-back-button" id="warehouseTopbarBackButton" title="กลับรายการสินค้า" aria-label="กลับรายการสินค้า" hidden><span aria-hidden="true">←</span></button>
+            <button class="icon-button" id="refreshButton" title="รีเฟรชข้อมูล" aria-label="รีเฟรชข้อมูล">↻</button>
+          </div>
+        </header>
+        <section id="viewRoot" class="view-root"></section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js?v=20260911-central-warehouse-v3" type="module"></script>
+  </body>
+</html>
